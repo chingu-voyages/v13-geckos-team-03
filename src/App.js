@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <h1>Hi, Allan and Gema.</h1>
-      <p>Master and development branches are now protected!</p>  
+      <p>Follow the instructions in gitHooks/precommit to protect your local dev and master branches</p>  
     </div>
   );
 }

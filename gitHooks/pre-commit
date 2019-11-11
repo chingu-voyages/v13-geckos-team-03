@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Copy this file into .git/hooks
+# If on linux run the below command to make the file executable:
+
+# $ chmod +x .git/hooks/pre-commit
+
+# That step isn't required on windows but you might need to do it on a mac 
+
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [ "$branch" = "master" ]; then
+  echo "You can't commit directly to master branch"
+  exit 1
+fi
+
+if [ "$branch" = "development" ]; then
+  echo "You can't commit directly to development branch"
+  exit 1
+fi
