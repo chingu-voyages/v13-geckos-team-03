@@ -15,6 +15,7 @@ function Results() {
       <ResultCard
         poster="https://image.tmdb.org/t/p/w300/kqjL17yufvn9OVLyXYpvtyrFfak.jpg"
         title="Lion King"
+        isFavourite={true}
         year="1994"
         rating="9.6"
         votes={19930}
@@ -23,6 +24,7 @@ function Results() {
       <ResultCard
         poster="https://image.tmdb.org/t/p/w300/kqjL17yufvn9OVLyXYpvtyrFfak.jpg"
         title="Lion King 2"
+        isFavourite={false}
         year="1998"
         rating="4.3"
         votes={253}

@@ -18,11 +18,34 @@ const Info = styled.div`
   padding-top: 10px;
 `;
 
+const Top = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const Title = styled.div`
   font-size: 40px;
 `;
 
-const Rating = styled.div``;
+const Heart = styled.div`
+  font-size: 20px;
+  cursor: pointer;
+`;
+
+const Year = styled.div`
+  font-weight: bold;
+  margin: 0 0 5px 10px;
+`;
+
+const Rating = styled.div`
+  margin-bottom: 20px;
+`;
+
+const BoldBig = styled.a`
+  font-weight: bold;
+  font-size: 16px;
+`;
 
 function ResultCard(props) {
   return (
@@ -33,10 +56,18 @@ function ResultCard(props) {
         }}
       ></Poster>
       <Info>
-        <Title>{props.title}</Title>
-        {props.year}
+        <Top>
+          <Title>{props.title}</Title>
+          <Heart
+            className={props.isFavourite ? "fa fa-heart" : "fa fa-heart-o"}
+            style={props.isFavourite ? { color: "red" } : { color: "black" }}
+          ></Heart>
+        </Top>
+
+        <Year>{props.year}</Year>
         <Rating>
-          {props.rating}/10 {props.votes} votes
+          <BoldBig>{props.rating}</BoldBig>/10 <BoldBig>{props.votes}</BoldBig>{" "}
+          votes
         </Rating>
         <div>{props.summary}</div>
       </Info>
