@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Heart } from "styled-icons/fa-regular/Heart";
+import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline";
 
 const Card = styled.div`
   display: grid;
@@ -28,8 +30,12 @@ const Title = styled.div`
   font-size: 40px;
 `;
 
-const Heart = styled.div`
-  font-size: 20px;
+const EmptyHeart = styled(Heart)`
+  cursor: pointer;
+`;
+
+const FullHeart = styled(HeartFullOutline)`
+  color: red;
   cursor: pointer;
 `;
 
@@ -47,6 +53,8 @@ const BoldBig = styled.a`
   font-size: 16px;
 `;
 
+const Summary = styled.div``;
+
 function ResultCard(props) {
   return (
     <Card>
@@ -58,10 +66,11 @@ function ResultCard(props) {
       <Info>
         <Top>
           <Title>{props.title}</Title>
-          <Heart
-            className={props.isFavourite ? "fa fa-heart" : "fa fa-heart-o"}
-            style={props.isFavourite ? { color: "red" } : { color: "black" }}
-          ></Heart>
+          {props.isFavourite ? (
+            <FullHeart size="25" />
+          ) : (
+            <EmptyHeart size="24" />
+          )}
         </Top>
 
         <Year>{props.year}</Year>
@@ -69,7 +78,7 @@ function ResultCard(props) {
           <BoldBig>{props.rating}</BoldBig>/10 <BoldBig>{props.votes}</BoldBig>{" "}
           votes
         </Rating>
-        <div>{props.summary}</div>
+        <Summary>{props.summary}</Summary>
       </Info>
     </Card>
   );
