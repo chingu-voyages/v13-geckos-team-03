@@ -83,17 +83,17 @@ function ResultCard(props) {
           )}
         </Top>
 
-        <Year>{props.year}</Year>
+        <Year>{props.releaseDate}</Year>
 
         <Rating>
-          <RatingBar rating={props.rating} />
+          <RatingBar voteAverage={props.voteAverage} />
           <div>
-            <BoldBig>{props.rating}</BoldBig>/10
-            <BoldBig>- {props.votes}</BoldBig> votes
+            <BoldBig>{props.voteAverage}</BoldBig>/10
+            <BoldBig>- {props.voteCount}</BoldBig> votes
           </div>
         </Rating>
 
-        <Summary>{props.summary}</Summary>
+        <Summary>{props.overview}</Summary>
       </Info>
     </Card>
   );

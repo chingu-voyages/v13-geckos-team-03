@@ -25,13 +25,13 @@ function RatingBar(props) {
     }
   };
 
-  const color = setColor(props.rating);
+  const color = setColor(props.voteAverage);
 
   return (
     <OuterBar>
       <InnerBar
         style={{
-          width: `${props.rating * 20}px`,
+          width: `${props.voteAverage * 20}px`,
           backgroundColor: `${color}`
         }}
       ></InnerBar>
