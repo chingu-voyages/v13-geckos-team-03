@@ -5,7 +5,8 @@ const OuterBar = styled.div`
   width: 200px;
   height: 10px;
   border-radius: 10px;
-  background-color: #ebebeb;
+  background-color: #ddd;
+  margin-right: 15px;
 `;
 
 const InnerBar = styled.div`

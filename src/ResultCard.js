@@ -48,12 +48,18 @@ const Year = styled.div`
 `;
 
 const Rating = styled.div`
+  // display: inline-grid;
+  // grid-template-columns: 200px auto auto;
+  // grid-column-gap: 15px;
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
 `;
 
 const BoldBig = styled.a`
   font-weight: bold;
   font-size: 16px;
+  margin-left: 6px;
 `;
 
 const Summary = styled.div``;
@@ -77,11 +83,17 @@ function ResultCard(props) {
         </Top>
 
         <Year>{props.year}</Year>
+
         <Rating>
           <RatingBar rating={props.rating} />
-          <BoldBig>{props.rating}</BoldBig>/10 <BoldBig>{props.votes}</BoldBig>{" "}
-          votes
+          <div>
+            <BoldBig>{props.rating}</BoldBig>/10
+          </div>{" "}
+          <div>
+            <BoldBig>- {props.votes}</BoldBig> votes
+          </div>
         </Rating>
+
         <Summary>{props.summary}</Summary>
       </Info>
     </Card>
