@@ -8,20 +8,22 @@ import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline";
 
 const Card = styled.div`
   display: grid;
-  grid-template-columns: 200px auto;
+  grid-template-columns: 185px auto;
   grid-column-gap: 20px;
   padding: 20px 0;
-  min-height: 300px;
+  height: 278px;
+  max-height: 278px;
 `;
 
 const Poster = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
-  width: 200px;
+  width: 185px;
 `;
 
 const Info = styled.div`
-  padding-top: 10px;
+  padding: 10px 10px 10px 0;
+  overflow: hidden;
 `;
 
 const Top = styled.div`
@@ -83,13 +85,14 @@ function ResultCard(props) {
           )}
         </Top>
 
-        <Year>{props.releaseDate}</Year>
+        <Year>{props.releaseDate.slice(0, 4)}</Year>
 
         <Rating>
           <RatingBar voteAverage={props.voteAverage} />
           <div>
             <BoldBig>{props.voteAverage}</BoldBig>/10
-            <BoldBig>- {props.voteCount}</BoldBig> votes
+            <BoldBig>- {props.voteCount}</BoldBig>{" "}
+            {props.voteCount === 1 ? "vote" : "votes"}
           </div>
         </Rating>
 

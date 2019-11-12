@@ -11,7 +11,7 @@ const OuterBar = styled.div`
 
 const InnerBar = styled.div`
   height: 10px;
-  border-radius: 10px 0 0 10px;
+  border-radius: 10px;
 `;
 
 function RatingBar(props) {

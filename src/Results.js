@@ -15,9 +15,9 @@ function Results(props) {
       {props.searchResults.map(result => (
         <ResultCard
           key={result.id}
-          poster={`https://image.tmdb.org/t/p/w300${result.poster_path}`}
+          poster={`https://image.tmdb.org/t/p/w185${result.poster_path}`}
           title={result.title}
-          isFavourite={true}
+          isFavourite={false}
           releaseDate={result.release_date}
           voteAverage={result.vote_average}
           voteCount={result.vote_count}
