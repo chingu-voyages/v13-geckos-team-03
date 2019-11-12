@@ -8,15 +8,16 @@ import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline";
 
 const Card = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-column-gap: 40px;
+  grid-template-columns: 200px auto;
+  grid-column-gap: 20px;
   padding: 20px 0;
-  min-height: 450px;
+  min-height: 300px;
 `;
 
 const Poster = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
+  width: 200px;
 `;
 
 const Info = styled.div`
@@ -43,17 +44,17 @@ const FullHeart = styled(HeartFullOutline)`
 `;
 
 const Year = styled.div`
-  font-weight: bold;
-  margin: 0 0 5px 10px;
+  margin: 0 0 10px 10px;
 `;
 
 const Rating = styled.div`
-  // display: inline-grid;
-  // grid-template-columns: 200px auto auto;
-  // grid-column-gap: 15px;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const BoldBig = styled.a`
@@ -88,8 +89,6 @@ function ResultCard(props) {
           <RatingBar rating={props.rating} />
           <div>
             <BoldBig>{props.rating}</BoldBig>/10
-          </div>{" "}
-          <div>
             <BoldBig>- {props.votes}</BoldBig> votes
           </div>
         </Rating>

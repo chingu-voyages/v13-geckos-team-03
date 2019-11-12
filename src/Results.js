@@ -6,7 +6,7 @@ import ResultCard from "./ResultCard";
 const Container = styled.div`
   margin: 0 auto;
   min-height: 900px;
-  width: 940px;
+  max-width: 940px;
 `;
 
 function Results() {

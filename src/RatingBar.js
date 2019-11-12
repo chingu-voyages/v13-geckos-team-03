@@ -21,7 +21,7 @@ function RatingBar(props) {
     } else if (rating >= 3.3) {
       return "Gold";
     } else {
-      return "red";
+      return "Red";
     }
   };
 
