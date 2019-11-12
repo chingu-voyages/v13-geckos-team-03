@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+
+import RatingBar from "./RatingBar";
+
 import { Heart } from "styled-icons/fa-regular/Heart";
 import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline";
 
@@ -27,7 +30,7 @@ const Top = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 40px;
+  font-size: 34px;
 `;
 
 const EmptyHeart = styled(Heart)`
@@ -75,6 +78,7 @@ function ResultCard(props) {
 
         <Year>{props.year}</Year>
         <Rating>
+          <RatingBar rating={props.rating} />
           <BoldBig>{props.rating}</BoldBig>/10 <BoldBig>{props.votes}</BoldBig>{" "}
           votes
         </Rating>
