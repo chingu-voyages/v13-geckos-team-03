@@ -1,12 +1,30 @@
 import React from "react";
-import "./App.css";
+import { BrowserRouter, Route } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import Header from "./Components/Header/header";
+import MyFilms from "./Components/Header/myfilms-test";
+import Footer from "./Components/Footer/footer";
+
+const GlobalStyle = createGlobalStyle `
+  body {
+    font-family: "Roboto", sans-serif;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+`
 
 function App() {
   return (
-    <div>
-      <h1>Hi, Allan and Gema.</h1>
-      <p>Follow the instructions in gitHooks/precommit to protect your local dev and master branches</p>  
-    </div>
+    <>
+    <GlobalStyle />
+    <BrowserRouter>
+    <Header />
+    <Route path="/myfilms" component={MyFilms}/>
+    </BrowserRouter>
+    <Footer/>
+    </>
   );
 }
 
