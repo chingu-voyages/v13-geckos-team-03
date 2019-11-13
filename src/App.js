@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Results from "./Results";
 
 function App() {
+  //BELOW for testing, remove later
   const [searchResults, setSearchResults] = useState(null);
-
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
@@ -15,6 +15,7 @@ function App() {
     }
     fetchData();
   }, []);
+  //AFTER for testing, remove later
 
   return (
     <div>{searchResults && <Results searchResults={searchResults} />}</div>
