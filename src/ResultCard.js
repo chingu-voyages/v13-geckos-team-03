@@ -3,22 +3,23 @@ import styled from "styled-components";
 
 import RatingBar from "./RatingBar";
 
-import { Heart } from "styled-icons/fa-regular/Heart";
+import { Heart, FileImage } from "styled-icons/fa-regular";
 import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline";
 
 const Card = styled.div`
   display: grid;
   grid-template-columns: 185px auto;
   grid-column-gap: 20px;
-  padding: 20px 0;
+  padding: 15px 0;
   height: 278px;
   max-height: 278px;
 `;
 
 const Poster = styled.div`
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 185px;
+  display: flex;
+  background: LightGray;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Info = styled.div`
@@ -70,11 +71,19 @@ const Summary = styled.div``;
 function ResultCard(props) {
   return (
     <Card>
-      <Poster
-        style={{
-          backgroundImage: `url(${props.poster})`
-        }}
-      ></Poster>
+      <Poster>
+        {props.poster.slice(-4) == "null" ? ( //display a image logo if there is no poster from the database
+          <FileImage size="60" color="gray" />
+        ) : (
+          <img // display the corresponding poster for the movie
+            src={`${props.poster}`}
+            alt="Movie Poster"
+            width="185"
+            height="278"
+            style={{ objectFit: "cover" }}
+          />
+        )}
+      </Poster>
       <Info>
         <Top>
           <Title>{props.title}</Title>
