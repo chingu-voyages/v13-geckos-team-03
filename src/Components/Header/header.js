@@ -33,7 +33,7 @@ const Links = styled.ul`
   `
 
 const StyledNavLink = styled(NavLink)`
-  color: #ffff;
+  color: rgb(255, 255, 255, 0.64);
   font-weight: 300;
   margin: 0 1.5rem;
   text-decoration: none;
@@ -43,12 +43,11 @@ const StyledNavLink = styled(NavLink)`
     color: #ccc;
   }
 
-  &.attrs({activeClassName: 'active'
-})
+  &.attrs({activeClassName: 'active'})
   color: #ffff;
 
   &.active {
-    color: rgb(255, 255, 255, 0.64);
+    color: #FFFF;
     border-bottom: 1px solid rgb(255, 255, 255, 0.64)
   }
   `
