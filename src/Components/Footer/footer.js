@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-const Footerbar = styled.nav`
+const FooterBar = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;  
@@ -20,9 +20,9 @@ const Footerbar = styled.nav`
 class Footer extends Component {
   render() {
     return (
-      <Footerbar>
+      <FooterBar>
         <p>Coded by <a href="https://github.com/chingu-voyages/v13-geckos-team-03"> Geckos Team 3</a> | Voyage 13, Chingu | 2019</p>
-      </Footerbar>)
+      </FooterBar>)
   }
 };
 
