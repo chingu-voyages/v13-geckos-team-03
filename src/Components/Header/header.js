@@ -51,16 +51,16 @@ const StyledNavLink = styled(NavLink)`
     border-bottom: 1px solid rgb(255, 255, 255, 0.64)
   }
   `
-const Button = styled.button`
+const SettingsButton = styled.button`
   margin-right: 10rem;
   background-color: #3B3272;
   border: none;
   cursor: pointer;
   `
-const MySVG = styled(SVG)`
+const SettingsSVG = styled(SVG)`
   width: 20px;  
   height: 20px;
-  fill: rgb(255, 255, 255, 0.80); 
+  fill: rgb(255, 255, 255, 0.64); 
   `
 
 class Header extends Component {
@@ -72,7 +72,7 @@ class Header extends Component {
           <li><StyledNavLink exact to="/" activeClassName="active">search</StyledNavLink></li>
           <li><StyledNavLink exact to="/myfilms" activeClassName="active">my films</StyledNavLink></li>
         </Links>
-        <Button aria-label="account config"><MySVG src={settings} /></Button>
+        <SettingsButton aria-label="settings button"><SettingsSVG src={settings} /></SettingsButton>
       </NavBar>
     )
   }
