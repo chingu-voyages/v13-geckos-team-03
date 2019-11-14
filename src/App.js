@@ -1,9 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+
 import Header from "./Components/Header/header";
-import MyFilms from "./Components/Header/myfilms-test";
 import Footer from "./Components/Footer/footer";
+import SearchView from "./SearchView";
+import MyFilmsView from "./MyFilmsView";
 
 const GlobalStyle = createGlobalStyle `
   body {
@@ -18,12 +20,13 @@ const GlobalStyle = createGlobalStyle `
 function App() {
   return (
     <>
-    <GlobalStyle />
-    <BrowserRouter>
-    <Header />
-    <Route path="/myfilms" component={MyFilms}/>
-    </BrowserRouter>
-    <Footer/>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Header />
+        <Route exact path="/" component={SearchView}/>
+        <Route path="/myfilms" component={MyFilmsView}/>
+        <Footer/>
+      </BrowserRouter>
     </>
   );
 }
