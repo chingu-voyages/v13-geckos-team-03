@@ -4,8 +4,8 @@ import { createGlobalStyle } from "styled-components";
 
 import Header from "./Components/Header/header";
 import Footer from "./Components/Footer/footer";
-import SearchView from "./Components/SearchView";
-import MyFilmsView from "./Components/MyFilmsView";
+import SearchView from "./SearchView";
+import MyFilmsView from "./MyFilmsView";
 
 const GlobalStyle = createGlobalStyle `
   body {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import SearchBar from '../SearchBar'
+import SearchBar from './Components/SearchBar'
 
 export default function() {
     const [results, updateResults] = useState([]);

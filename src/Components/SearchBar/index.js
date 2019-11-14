@@ -46,6 +46,7 @@ const SearchBar = ({ updateResults }) => {
 
   const handleSubmit = async event => {
     event.preventDefault();
+    if (searchText.length < 1) return; // input is empty
     const results = await searchFilmTitle(searchText);
     updateResults([...results]);
   }
