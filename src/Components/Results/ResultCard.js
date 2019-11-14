@@ -94,7 +94,11 @@ function ResultCard(props) {
           )}
         </Top>
 
-        <Year>{props.releaseDate.slice(0, 4)}</Year>
+        <Year>
+          {props.releaseDate === undefined
+            ? "Unknown Release Year"
+            : props.releaseDate.slice(0, 4)}
+        </Year>
 
         <Rating>
           <RatingBar voteAverage={props.voteAverage} />
