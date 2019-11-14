@@ -32,8 +32,8 @@ const Form = styled.form`
 
 const FormGroup = styled.div`
   display: inline-block;
-  padding: 25px 60px;
-  border-radius: 30px;
+  padding: 25px 40px;
+  border-radius: 40px;
   background-color: #fff;
 `;
 
