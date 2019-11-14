@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react';
+
+import SearchBar from '../SearchBar'
 
 export default function() {
+    const [results, updateResults] = useState([]);
     return (
         <div>
-            <h1>Search View</h1>
+            <SearchBar updateResults={updateResults}/>
+            
+            {/* Container Here for results */}
+            {results.map(i => <p key={i.title}>{i.title}</p>)}           
         </div>
     )
 }
