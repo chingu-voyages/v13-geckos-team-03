@@ -72,7 +72,7 @@ function ResultCard(props) {
   return (
     <Card>
       <Poster>
-        {props.poster.slice(-4) == "null" ? ( //display a image logo if there is no poster from the database
+        {props.poster.slice(-4) === "null" ? ( //display a image logo if there is no poster from the database
           <FileImage size="60" color="gray" />
         ) : (
           <img // display the corresponding poster for the movie
