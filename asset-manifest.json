@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/v13-geckos-team-03/static/js/main.16cd1cc6.chunk.js",
-    "main.js.map": "/v13-geckos-team-03/static/js/main.16cd1cc6.chunk.js.map",
+    "main.js": "/v13-geckos-team-03/static/js/main.83d0507d.chunk.js",
+    "main.js.map": "/v13-geckos-team-03/static/js/main.83d0507d.chunk.js.map",
     "runtime-main.js": "/v13-geckos-team-03/static/js/runtime-main.569bff80.js",
     "runtime-main.js.map": "/v13-geckos-team-03/static/js/runtime-main.569bff80.js.map",
     "static/js/2.bb7fa41a.chunk.js": "/v13-geckos-team-03/static/js/2.bb7fa41a.chunk.js",
     "static/js/2.bb7fa41a.chunk.js.map": "/v13-geckos-team-03/static/js/2.bb7fa41a.chunk.js.map",
     "index.html": "/v13-geckos-team-03/index.html",
-    "precache-manifest.31c20eb233bf8ba246819caaef66af78.js": "/v13-geckos-team-03/precache-manifest.31c20eb233bf8ba246819caaef66af78.js",
+    "precache-manifest.28ff97ffc6a9bf32ae93cdf22fde67f5.js": "/v13-geckos-team-03/precache-manifest.28ff97ffc6a9bf32ae93cdf22fde67f5.js",
     "service-worker.js": "/v13-geckos-team-03/service-worker.js",
     "static/media/cog.svg": "/v13-geckos-team-03/static/media/cog.5f9fe871.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.569bff80.js",
     "static/js/2.bb7fa41a.chunk.js",
-    "static/js/main.16cd1cc6.chunk.js"
+    "static/js/main.83d0507d.chunk.js"
   ]
 }
