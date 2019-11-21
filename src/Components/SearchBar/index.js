@@ -40,6 +40,8 @@ const FormGroup = styled.div`
 const SearchBar = ({ updateResults }) => {
   const [searchText, setSearchText] = useState("");
   const [atBottom, setAtBottom] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleSearchTextChange = event => {
     setSearchText(event.target.value);
@@ -48,8 +50,12 @@ const SearchBar = ({ updateResults }) => {
   const handleSubmit = async event => {
     event.preventDefault();
     if (searchText.length < 1) return; // input is empty
-    const results = await searchFilmTitle(searchText);
+    const { total_pages, results } = await searchFilmTitle(
+      searchText,
+      currentPage
+    );
     updateResults([...results]);
+    setTotalPages(total_pages);
   };
 
   // add event listener to scroll, please see handleScroll function
