@@ -7,7 +7,6 @@ const DBConnect = require("./DB")
 
 const app = express();
 setupMiddleware(app);
-DBConnect();
 
 app.use("/api", Router);
 
@@ -16,7 +15,9 @@ app.all("*", (req, res) => {
   res.status(404).json({message: "No resource found at that location!"})
 });
 
-const PORT = process.env.PORT || 9000;
+DBConnect();
+
+const PORT = process.env.PORT | 8000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
