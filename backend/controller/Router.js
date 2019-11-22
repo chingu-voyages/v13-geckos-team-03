@@ -1,9 +1,11 @@
 const Router = require("express").Router();
 
-Router.route("/")
-  .get((req, res) => {
-    console.log("req.body:  ", req.body);
-    res.json({what: "is this"})
-  })
+const UserController = require("./UserController.js");
+
+Router.route("/user")
+  .post(UserController.createUser)
+  .get(UserController.getUser)
+  .put(UserController.updateUser)
+  .delete(UserController.deleteUser)
 
 module.exports = Router;
