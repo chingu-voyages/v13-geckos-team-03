@@ -7,7 +7,7 @@ import Footer from "./Components/Footer/footer";
 import SearchView from "./SearchView";
 import MyFilmsView from "./MyFilmsView";
 
-const GlobalStyle = createGlobalStyle `
+const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Roboto", sans-serif;
     position: relative;
@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle `
     padding: 0;
     margin: 0;
   }
-`
+`;
 
 function App() {
   return (
@@ -23,9 +23,9 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Header />
-        <Route exact path="/" component={SearchView}/>
-        <Route path="/myfilms" component={MyFilmsView}/>
-        <Footer/>
+        <Route exact path="/" component={SearchView} />
+        <Route path="/myfilms" component={MyFilmsView} />
+        <Footer />
       </BrowserRouter>
     </>
   );
