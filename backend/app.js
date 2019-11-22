@@ -1,11 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 
-const setupMiddleware = require("./util/setupMiddleware.js")
+const setupMiddleware = require("./util/setupMiddleware.js");
 const Router = require("./controller/Router.js");
+const DBConnect = require("./DB")
 
 const app = express();
-
 setupMiddleware(app);
+DBConnect();
 
 app.use("/api", Router);
 
