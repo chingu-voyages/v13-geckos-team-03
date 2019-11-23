@@ -1,7 +1,7 @@
 const express = require("express");
 
-const setupMiddleware = require("./util/setupMiddleware.js");
-const Router = require("./controller/Router.js");
+const setupMiddleware = require("./util/setupMiddleware");
+const Router = require("./resources/Router");
 const DBConnect = require("./DB")
 
 const app = express();
