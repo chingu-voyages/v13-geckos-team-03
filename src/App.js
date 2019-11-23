@@ -6,6 +6,7 @@ import Header from "./Components/Header/header";
 import Footer from "./Components/Footer/footer";
 import SearchView from "./SearchView";
 import MyFilmsView from "./MyFilmsView";
+import HomePageView from "./HomePageView";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,9 +22,10 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
+      <BrowserRouter basename="/v13-geckos-team-03">
         <Header />
-        <Route exact path="/" component={SearchView} />
+        <Route exact path="/" component={HomePageView} />
+        <Route exact path="/search" component={SearchView} />
         <Route path="/myfilms" component={MyFilmsView} />
         <Footer />
       </BrowserRouter>

@@ -69,7 +69,7 @@ class Header extends Component {
       <NavBar>
         <Logo to="/">The Film DB <span role="img" aria-label="popcorn emoji">🍿</span></Logo>
         <Links>
-          <li><StyledNavLink exact to="/" activeClassName="active">search</StyledNavLink></li>
+          <li><StyledNavLink exact to="/search" activeClassName="active">search</StyledNavLink></li>
           <li><StyledNavLink exact to="/myfilms" activeClassName="active">my films</StyledNavLink></li>
         </Links>
         <SettingsButton aria-label="settings button"><SettingsSVG src={settings} /></SettingsButton>
