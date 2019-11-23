@@ -49,10 +49,7 @@ const SearchBar = ({ updateResults }) => {
   const handleSubmit = async event => {
     event.preventDefault();
     if (searchText.length < 1) return; // input is empty
-    const { total_pages, results } = await searchFilmTitle(
-      searchText,
-      currentPage
-    );
+    const { total_pages, results } = await searchFilmTitle(searchText, 1);
     updateResults([...results]);
     setTotalPages(total_pages + 1);
     setCurrentPage(1);
@@ -64,7 +61,7 @@ const SearchBar = ({ updateResults }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   });
 
-  // when user scroll to bottom set atBottom to true
+  // when user scroll to bottom increase the current page count by 1, but only if not on the last page
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop ===
@@ -76,11 +73,13 @@ const SearchBar = ({ updateResults }) => {
     }
   };
 
+  // when currentPage is changed fetchMoreFilms
   useEffect(() => {
     if (currentPage >= totalPages) return;
     fetchMoreFilms();
   }, [currentPage]);
 
+  // fetch more films and add to the end of the previous results
   async function fetchMoreFilms() {
     const { results } = await searchFilmTitle(searchText, currentPage);
     updateResults(prev => [...prev, ...results]);
