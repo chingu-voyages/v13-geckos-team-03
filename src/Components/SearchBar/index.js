@@ -38,9 +38,9 @@ const FormGroup = styled.div`
 `;
 
 const SearchBar = ({ updateResults }) => {
-  const [searchText, setSearchText] = useState("");
-  const [totalPages, setTotalPages] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchText, setSearchText] = useState(""); // what the user is searching
+  const [totalPages, setTotalPages] = useState(1); // the total number of pages (20 results per page) for the search
+  const [currentPage, setCurrentPage] = useState(1); // how many pages of the total amount have been rendered on screen
 
   const handleSearchTextChange = event => {
     setSearchText(event.target.value);
@@ -51,7 +51,7 @@ const SearchBar = ({ updateResults }) => {
     if (searchText.length < 1) return; // input is empty
     const { total_pages, results } = await searchFilmTitle(searchText, 1);
     updateResults([...results]);
-    setTotalPages(total_pages + 1);
+    setTotalPages(total_pages);
     setCurrentPage(1);
   };
 
@@ -73,9 +73,9 @@ const SearchBar = ({ updateResults }) => {
     }
   };
 
-  // when currentPage is changed fetchMoreFilms
+  // when currentPage is changed fetchMoreFilms. But not when the currentPage is at 1 (this is to stop calling API twice from this useEffect and handleSubmit function)
   useEffect(() => {
-    if (currentPage >= totalPages || currentPage === 1) return;
+    if (currentPage === 1) return;
     fetchMoreFilms();
   }, [currentPage]);
 
