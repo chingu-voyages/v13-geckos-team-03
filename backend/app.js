@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 
 const setupMiddleware = require("./util/setupMiddleware.js");
@@ -17,8 +16,4 @@ app.all("*", (req, res) => {
 
 DBConnect();
 
-const PORT = process.env.PORT | 8000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+module.exports = app;
