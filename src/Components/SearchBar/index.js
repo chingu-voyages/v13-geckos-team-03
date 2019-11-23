@@ -75,7 +75,7 @@ const SearchBar = ({ updateResults }) => {
 
   // when currentPage is changed fetchMoreFilms
   useEffect(() => {
-    if (currentPage >= totalPages) return;
+    if (currentPage >= totalPages || currentPage === 1) return;
     fetchMoreFilms();
   }, [currentPage]);
 
