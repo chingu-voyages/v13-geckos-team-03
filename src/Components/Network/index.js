@@ -1,5 +1,5 @@
-import APIKEY from '../../apikey.js';
-import { BACKEND_URL } from '../../config';
+import APIKEY from "../../apikey.js";
+import { BACKEND_URL } from "../../config";
 
 export const searchFilmTitle = async (value, currentPage) => {
   const searchText = value.replace(/ /, "+");
@@ -13,21 +13,19 @@ export const searchFilmTitle = async (value, currentPage) => {
   } catch (err) {
     console.error(err);
   }
-
-}
+};
 
 export const signup = async data => {
   try {
     const res = await fetch(`${BACKEND_URL}/api/signup`, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     });
-    res.json().then(data => console.log(data))
+    res.json().then(data => console.log(data));
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
-
+};

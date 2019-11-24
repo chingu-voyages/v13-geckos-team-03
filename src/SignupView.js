@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { signup } from './Components/Network';
-import { Form } from './StyledComponents/Forms';
+import { signup } from "./Components/Network";
+import { Form } from "./StyledComponents/Forms";
 
 export default function() {
   const [formState, updateFormState] = useState({
@@ -17,9 +17,9 @@ export default function() {
       return {
         ...data,
         [id]: value
-      }
-    })
-  }
+      };
+    });
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -27,8 +27,8 @@ export default function() {
     signup({
       email,
       password
-    })
-  }
+    });
+  };
 
   const { email, password, confirmPassword } = formState;
   return (
@@ -37,15 +37,34 @@ export default function() {
         <h3>sign up</h3>
         <div>
           <label for="email">email</label>
-          <input id="email" type="email" value={email} onChange={handleInputChange} required></input> 
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={handleInputChange}
+            onFocus={handleFocus}
+            required
+          ></input>
         </div>
         <div>
           <label for="password">password</label>
-          <input id="password" type="password" value={password} onChange={handleInputChange} required></input>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={handleInputChange}
+            required
+          ></input>
         </div>
         <div>
           <label for="confirmPassword">confirm password</label>
-          <input id="confirmPassword" type="password" value={confirmPassword} onChange={handleInputChange} required></input>           
+          <input
+            id="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={handleInputChange}
+            required
+          ></input>
         </div>
         <button type="submit">signup</button>
       </Form>

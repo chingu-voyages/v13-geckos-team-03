@@ -12,12 +12,15 @@ const generateToken = user => {
     process.env.APP_SECRET
   );
   return token;
-}
+};
 
 const signup = async (req, res) => {
   try {
     const hashedPassword = await hash(req.body.password, salt);
-    const newUser = await User.create({email: req.body.email, password: hashedPassword});
+    const newUser = await User.create({
+      email: req.body.email,
+      password: hashedPassword
+    });
     res.status(200).json({
       email: newUser.email,
       token: generateToken(newUser)
@@ -28,10 +31,10 @@ const signup = async (req, res) => {
     // duplicate key mongo error
     res.status(400).json({
       message: "That email is already signed up"
-    })
+    });
     return;
   }
-}
+};
 
 const login = async (req, res) => {
   if (!req.body.email) {
@@ -53,30 +56,29 @@ const login = async (req, res) => {
       email: req.body.email
     });
   } catch (err) {
-    console.log(err)
-    res.status(500).json({message: "server error"});
+    console.log(err);
+    res.status(500).json({ message: "server error" });
     return;
   }
 
   if (!user) {
-    res.status(400).json({message: "email not found"});
+    res.status(400).json({ message: "email not found" });
     return;
   }
-
 
   // check password
   let same;
   try {
-    same = await bcrypt.compare(req.body.password, user.password); 
+    same = await bcrypt.compare(req.body.password, user.password);
   } catch (err) {
-    console.log(err)
-    res.status(500).json({message: "server error"});
+    console.log(err);
+    res.status(500).json({ message: "server error" });
     return;
   }
-  
+
   // console.log(same)
   if (!same) {
-    res.status(400).json({message: "password incorrect"});
+    res.status(400).json({ message: "password incorrect" });
     return;
   }
 
@@ -85,6 +87,6 @@ const login = async (req, res) => {
     email: user.email,
     token: generateToken(user)
   });
-}
+};
 
-module.exports = { signup, login }
+module.exports = { signup, login };
