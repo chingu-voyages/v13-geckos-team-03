@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { signup } from './Components/Network';
+
 export default function() {
   const [formState, updateFormState] = useState({
     email: "",
@@ -20,14 +22,18 @@ export default function() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log("boom");
+    const { email, password } = formState;
+    signup({
+      email,
+      password
+    })
   }
 
   const { email, password, confirmPassword } = formState;
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h3>Login</h3>
+        <h3>sign up</h3>
         <label>email
           <input name="email" type="email" value={email} onChange={handleInputChange} required></input> 
         </label>

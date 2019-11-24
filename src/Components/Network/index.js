@@ -1,4 +1,5 @@
 import APIKEY from '../../apikey.js';
+import { BACKEND_URL } from '../../config';
 
 export const searchFilmTitle = async value => {
   const searchText = value.replace(/ /, "+");
@@ -14,14 +15,14 @@ export const searchFilmTitle = async value => {
 
 export const signup = async data => {
   try {
-    const res = await fetch(URL, {
+    const res = await fetch(`${BACKEND_URL}/api/signup`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     });
-    console.log(res)
+    res.json().then(data => console.log(data))
   } catch (err) {
     console.log(err)
   }
