@@ -12,11 +12,11 @@ export default function() {
   });
 
   const handleInputChange = event => {
-    const { value, name } = event.target;
+    const { value, id } = event.target;
     updateFormState(data => {
       return {
         ...data,
-        [name]: value
+        [id]: value
       }
     })
   }
@@ -37,15 +37,15 @@ export default function() {
         <h3>sign up</h3>
         <div>
           <label for="email">email</label>
-          <input name="email" type="email" value={email} onChange={handleInputChange} required></input> 
+          <input id="email" type="email" value={email} onChange={handleInputChange} required></input> 
         </div>
         <div>
           <label for="password">password</label>
-          <input name="password" type="password" value={password} onChange={handleInputChange} required></input>
+          <input id="password" type="password" value={password} onChange={handleInputChange} required></input>
         </div>
         <div>
           <label for="confirmPassword">confirm password</label>
-          <input name="confirmPassword" type="password" value={confirmPassword} onChange={handleInputChange} required></input>           
+          <input id="confirmPassword" type="password" value={confirmPassword} onChange={handleInputChange} required></input>           
         </div>
         <button type="submit">signup</button>
       </Form>
