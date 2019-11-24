@@ -10,4 +10,19 @@ export const searchFilmTitle = async value => {
   } catch (err) {
     console.error(err);
   }
-}  
+}
+
+export const signup = async data => {
+  try {
+    const res = await fetch(URL, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    console.log(res)
+  } catch (err) {
+    console.log(err)
+  }
+}
