@@ -30,6 +30,8 @@ describe("/api/signup", () => {
   it("wrong method should return 400", async () => {
     const res = await request.get("/api/signup");
     expect(res.status).toBe(400);
+    const userDocs = await User.find();
+    expect(userDocs.length).toBe(1);
   });
 
   it("valid signup request should be 200, create user and return token", async () => {
@@ -37,6 +39,8 @@ describe("/api/signup", () => {
     expect(res.status).toBe(200);
     expect(res.body.email).toEqual(user1.email);
     expect(typeof res.body.token).toBe('string');
+    const userDocs = await User.find();
+    expect(userDocs.length).toBe(2);
 });
 
   it("password should be hashed", async () => {
@@ -48,6 +52,8 @@ describe("/api/signup", () => {
   it("should reject if email already signed up", async () => {
     const res = await request.post("/api/signup").send(user1);
     expect(res.status).toBe(400);
+    const userDocs = await User.find();
+    expect(userDocs.length).toBe(2);
   })
 })
 
