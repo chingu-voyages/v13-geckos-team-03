@@ -10,6 +10,22 @@ const Title = styled.h1`
   padding: 20px;
 `;
 
+const Dropdown = styled.select`
+  display: block;
+  margin: 30px auto;
+  font-size: 34px;
+  border: none;
+  border-bottom: #3B3272 solid
+  color: #3B3272;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+  }
+  & > option {
+    font-size: 26px;
+  }
+`;
+
 export default function() {
   const [results, setResults] = useState([]);
   const [popOrTop, setPopOrTop] = useState(["popular"]);
@@ -32,9 +48,7 @@ export default function() {
 
   return (
     <div>
-      <Title>{popOrTop}</Title>
-
-      <select
+      <Dropdown
         value={popOrTop}
         name="popOrTop"
         onChange={handleChange}
@@ -42,7 +56,7 @@ export default function() {
       >
         <option value="popular">Popular</option>
         <option value="top_rated">Top Rated</option>
-      </select>
+      </Dropdown>
 
       {results.length === 0 ? null : <Results searchResults={results} />}
     </div>
