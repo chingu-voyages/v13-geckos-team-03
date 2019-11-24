@@ -26,20 +26,17 @@ beforeAll(async () => {
   }).catch(err => console.log(err));
 })
 
-xdescribe("/api/signup", () => { 
+describe("/api/signup", () => { 
   it("wrong method should return 400", async () => {
     const res = await request.get("/api/signup");
     expect(res.status).toBe(400);
   });
 
-  it("valid signup request should return 200", async () => {
-      const res = await request.post("/api/signup").send(user1);
-      expect(res.status).toBe(200);
-  });
-
-  it("valid signup request should create user", async () => {
-    const user1Doc = await User.findOne({email: user1.email});
-    expect(user1Doc.email).toEqual(user1.email);
+  it("valid signup request should be 200, create user and return token", async () => {
+    const res = await request.post("/api/signup").send(user1);
+    expect(res.status).toBe(200);
+    expect(res.body.email).toEqual(user1.email);
+    expect(typeof res.body.token).toBe('string');
 });
 
   it("password should be hashed", async () => {
@@ -73,27 +70,29 @@ describe("/api/login", () => {
     expect(res2.status).toBe(400);
   });
 
-  it("should return 400 and correct message if password is incorrect", async () => {
-    const res = await request.post("/api/login").send({
-      email: existingUser.email,
-      password: "wrongpassword"
-    });
-    expect(res.status).toBe(400);
-    expect(res.body.message).toBe("password incorrect")
-  })
-
   it("Should return 400 if email is not signed up", async () => {
     const res = await request.post("/api/login").send({
       email: "notsignedup@email.com",
       password: "password"
     });
     expect(res.status).toBe(400);
+    expect(res.body.message).toBe("email not found");
   });
 
-  // it("valid login request should return 200 and user object", async () => {
-  //   const res = await request.post("/api/login").send(existingUser)
-  //   expect(res.status).toBe(200);
-  //   expect(res.body.email).toEqual(existingUser.email);
-  // });
+  it("should return 400 and correct message if password is incorrect", async () => {
+    const res = await request.post("/api/login").send({
+      email: existingUser.email,
+      password: "wrongpassword"
+    });
+    expect(res.status).toBe(400);
+    expect(res.body.message).toBe("password incorrect");
+  })
+
+  it("valid login request should return 200 and user object with jwt", async () => {
+    const res = await request.post("/api/login").send(existingUser)
+    expect(res.status).toBe(200);
+    expect(res.body.email).toEqual(existingUser.email);
+    expect(typeof res.body.token).toBe('string');
+  });
 
 })
