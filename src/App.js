@@ -7,6 +7,8 @@ import Footer from "./Components/Footer/footer";
 import SearchView from "./SearchView";
 import MyFilmsView from "./MyFilmsView";
 import HomePageView from "./HomePageView";
+import SignupView from "./SignupView";
+import LoginView from "./LoginView";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,6 +29,8 @@ function App() {
         <Route exact path="/" component={HomePageView} />
         <Route exact path="/search" component={SearchView} />
         <Route path="/myfilms" component={MyFilmsView} />
+        <Route path="/signup" component={SignupView} />
+        <Route path="/login" component={LoginView} />
         <Footer />
       </BrowserRouter>
     </>
