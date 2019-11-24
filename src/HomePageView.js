@@ -12,22 +12,38 @@ const Title = styled.h1`
 
 export default function() {
   const [results, setResults] = useState([]);
-  const [] = useState(["popular"]);
+  const [popOrTop, setPopOrTop] = useState(["popular"]);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(popOrTop);
+  }, [popOrTop]);
 
-  const fetchData = async () => {
+  const fetchData = async popOrTop => {
     const res = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/${popOrTop}?api_key=${APIKEY}&language=en-US&page=1`
     );
     const data = await res.json();
     setResults(data.results);
   };
+
+  const handleChange = event => {
+    setPopOrTop(event.target.value);
+  };
+
   return (
     <div>
-      <Title>Popular films</Title>
+      <Title>{popOrTop}</Title>
+
+      <select
+        value={popOrTop}
+        name="popOrTop"
+        onChange={handleChange}
+        //multiple={true} Gets rid of a error in console:  The `value` prop supplied to <select> must be a scalar value if `multiple` is false. But messes with the dropdown box.
+      >
+        <option value="popular">Popular</option>
+        <option value="top_rated">Top Rated</option>
+      </select>
+
       {results.length === 0 ? null : <Results searchResults={results} />}
     </div>
   );
