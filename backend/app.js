@@ -2,7 +2,7 @@ const express = require("express");
 
 const setupMiddleware = require("./util/setupMiddleware");
 const Router = require("./resources/Router");
-const DBConnect = require("./DB")
+const DB = require("./DB")
 
 const app = express();
 setupMiddleware(app);
@@ -14,6 +14,6 @@ app.all("*", (req, res) => {
   res.status(404).json({message: "No resource found at that location!"})
 });
 
-DBConnect();
+DB();
 
 module.exports = app;

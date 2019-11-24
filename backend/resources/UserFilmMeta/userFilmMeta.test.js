@@ -6,7 +6,7 @@ const supertest = require("supertest");
 const request = supertest(app);
 
 
-describe("User Resource Tests", () => {
+describe("Resource - userFilmMeta", () => {
     // create user
 
     // get user
