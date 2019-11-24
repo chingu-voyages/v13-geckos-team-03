@@ -4,7 +4,8 @@ export default function() {
   const [formState, updateFormState] = useState({
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    errors: []
   });
 
   const handleInputChange = event => {
@@ -19,6 +20,7 @@ export default function() {
 
   const handleSubmit = event => {
     event.preventDefault();
+    console.log("boom");
   }
 
   const { email, password, confirmPassword } = formState;
@@ -27,13 +29,13 @@ export default function() {
       <form onSubmit={handleSubmit}>
         <h3>Login</h3>
         <label>email
-          <input name="email" type="email" value={email} onChange={handleInputChange}></input> 
+          <input name="email" type="email" value={email} onChange={handleInputChange} required></input> 
         </label>
         <label>password
-          <input name="password" type="password" value={password} onChange={handleInputChange}></input> 
+          <input name="password" type="password" value={password} onChange={handleInputChange} required></input> 
         </label>
         <label>confirm password
-          <input name="confirmPassword" type="password" value={confirmPassword} onChange={handleInputChange}></input> 
+          <input name="confirmPassword" type="password" value={confirmPassword} onChange={handleInputChange} required></input> 
         </label>
         <button type="submit">signup</button>
       </form>
