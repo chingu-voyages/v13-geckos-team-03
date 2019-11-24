@@ -4,12 +4,6 @@ import styled from "styled-components";
 import Results from "./Components/Results/Results";
 import APIKEY from "./apikey.js";
 
-const Title = styled.h1`
-  text-align: center;
-  font-size: 40px;
-  padding: 20px;
-`;
-
 const Dropdown = styled.select`
   display: block;
   margin: 30px auto;
