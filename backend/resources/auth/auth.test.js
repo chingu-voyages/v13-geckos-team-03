@@ -18,12 +18,18 @@ const existingUser = {
 };
 
 beforeAll(async () => {
-  await mongoose.connection.dropDatabase().catch(err => console.log(err));
+  try {
+    await mongoose.connection.dropDatabase();
+  } catch (err) {
+    console.log(err);
+  }
   const hashedPassword = await hash(existingUser.password);
   await User.create({
     email: existingUser.email,
     password: hashedPassword
   }).catch(err => console.log(err));
+
+  // const userDocs = await User.find();
 });
 
 describe("/api/signup", () => {
@@ -54,6 +60,19 @@ describe("/api/signup", () => {
     expect(res.status).toBe(400);
     const userDocs = await User.find();
     expect(userDocs.length).toBe(2);
+  });
+
+  it("Should return 400 if email or password are missing", async () => {
+    const res1 = await request.post("/api/signup").send({
+      email: "some@email.com",
+      password: ""
+    });
+    const res2 = await request.post("/api/signup").send({
+      email: "",
+      password: "password"
+    });
+    expect(res1.status).toBe(400);
+    expect(res2.status).toBe(400);
   });
 });
 

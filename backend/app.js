@@ -14,6 +14,13 @@ app.all("*", (req, res) => {
   res.status(404).json({ message: "No resource found at that location!" });
 });
 
+app.use((err, req, res, next) => {
+  // console.log(err);
+  res.status(500).json({
+    messages: [...err]
+  });
+});
+
 DB();
 
 module.exports = app;
