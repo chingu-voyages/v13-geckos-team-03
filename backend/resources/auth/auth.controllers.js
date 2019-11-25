@@ -54,12 +54,7 @@ const signup = async (req, res, next) => {
       token: generateToken(newUser)
     });
   } catch (err) {
-    // !!! more than one type of error can happen here
-    // duplicate key?
     next(err);
-    // res.status(400).json({
-    //   message: "That email is already signed up"
-    // });
     return;
   }
 };
