@@ -12,19 +12,29 @@ export const Form = styled.form`
   label {
     position: absolute;
   }
+  > div {
+    position: relative;
+    margin-top: 40px;
+    &:last-of-type {
+      margin-bottom: 40px;
+    }
+  }
 `;
 
 export const FormLabel = styled.label`
   transition: transform 0.1s ease, opacity 0.1s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
   ${({ hasFocus, hasInput }) => {
     if (hasFocus || hasInput) {
       return css`
-        transform: translate(10px, -14px) scale(0.8);
+        transform: translate(10px, -26px) scale(0.8);
         opacity: 0.8;
       `;
     } else {
       return css`
-        transform: translate(17px, 21px);
+        transform: translate(17px, 11px);
       `;
     }
   }}
@@ -32,9 +42,10 @@ export const FormLabel = styled.label`
 
 export const Input = styled.input`
   width: 250px;
-  padding: 10px 15px;
-  margin-top: 10px;
+  padding: 12px 15px;
   font-size: 1rem;
+  border: none;
+  border-radius: 4px;
 `;
 
 export const SubmitButton = styled.button`
@@ -44,7 +55,7 @@ export const SubmitButton = styled.button`
   padding: 10px 15px;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 3px;
+  border-radius: 6px;
   &:hover {
     cursor: pointer;
   }
