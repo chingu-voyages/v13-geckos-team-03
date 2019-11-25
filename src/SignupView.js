@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import { signup } from "./Components/Network";
-import { Form, FormLabel, Input, SubmitButton } from "./StyledComponents/Forms";
+import {
+  Form,
+  FormLabel,
+  Input,
+  SubmitButton,
+  Errors,
+  FormControls,
+  FormLink
+} from "./StyledComponents/Forms";
 
 const Container = styled.div`
   padding: 30px 15px;
@@ -18,6 +27,8 @@ export default function() {
     hasFocus: "",
     errors: []
   });
+
+  const history = useHistory();
 
   const updateFocus = value => {
     updateFormState(state => {
@@ -47,16 +58,35 @@ export default function() {
     });
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    const { email, password } = formState;
-    signup({
+    const { email, password, confirmPassword } = formState;
+    if (password !== confirmPassword) {
+      updateFormState(state => {
+        return {
+          ...state,
+          errors: ["passwords don't match"]
+        };
+      });
+      return;
+    }
+    const data = await signup({
       email,
       password
     });
+    if (data.errors) {
+      updateFormState(state => {
+        return {
+          ...state,
+          errors: [...data.errors]
+        };
+      });
+    } else {
+      history.push("/myfilms");
+    }
   };
 
-  const { email, password, confirmPassword, hasFocus } = formState;
+  const { email, password, confirmPassword, hasFocus, errors } = formState;
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -65,7 +95,7 @@ export default function() {
           <FormLabel
             htmlFor="email"
             hasFocus={hasFocus === "email" ? true : false}
-            // hasInput={email.length ? true : false}
+            hasInput={email.length ? true : false}
           >
             email
           </FormLabel>
@@ -115,7 +145,15 @@ export default function() {
             required
           ></Input>
         </div>
-        <SubmitButton type="submit">Sign Up</SubmitButton>
+        <Errors>
+          {errors.map((error, i) => (
+            <figure key={`${error}_${i}`}>{error}</figure>
+          ))}
+        </Errors>
+        <FormControls>
+          <SubmitButton type="submit">Sign Up</SubmitButton>
+          <FormLink to="/login">login here</FormLink>
+        </FormControls>
       </Form>
     </Container>
   );

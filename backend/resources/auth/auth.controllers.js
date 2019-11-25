@@ -29,7 +29,7 @@ const signup = async (req, res, next) => {
   const messages = validate(req.body);
   if (messages.length) {
     res.status(400).json({
-      messages: [...messages]
+      errors: [...messages]
     });
     return;
   }
@@ -41,7 +41,7 @@ const signup = async (req, res, next) => {
     });
     if (userExists.length) {
       res.status(400).json({
-        messages: ["email already signed up"]
+        errors: ["email already signed up"]
       });
       return;
     }
@@ -68,7 +68,7 @@ const login = async (req, res) => {
   const messages = validate(req.body);
   if (messages.length) {
     res.status(400).json({
-      messages: [...messages]
+      errors: [...messages]
     });
     return;
   }
@@ -80,12 +80,12 @@ const login = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "server error" });
+    res.status(500).json({ errors: ["server error"] });
     return;
   }
 
   if (!user) {
-    res.status(400).json({ message: "email not found" });
+    res.status(400).json({ errors: ["email not found"] });
     return;
   }
 
@@ -95,13 +95,13 @@ const login = async (req, res) => {
     same = await bcrypt.compare(req.body.password, user.password);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "server error" });
+    res.status(500).json({ errors: ["server error"] });
     return;
   }
 
   // console.log(same)
   if (!same) {
-    res.status(400).json({ message: "password incorrect" });
+    res.status(400).json({ errors: ["password incorrect"] });
     return;
   }
 

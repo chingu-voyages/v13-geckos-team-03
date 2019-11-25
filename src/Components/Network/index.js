@@ -15,16 +15,43 @@ export const searchFilmTitle = async (value, currentPage) => {
   }
 };
 
-export const signup = async data => {
+export const signup = async formData => {
   try {
     const res = await fetch(`${BACKEND_URL}/api/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(formData)
     });
-    res.json().then(data => console.log(data));
+    const data = await res.json();
+    if (res.status !== 200) {
+      return {
+        errors: [...data.errors]
+      };
+    }
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const login = async formData => {
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+    const data = await res.json();
+    if (res.status !== 200) {
+      return {
+        errors: [...data.errors]
+      };
+    }
+    return data;
   } catch (err) {
     console.log(err);
   }
