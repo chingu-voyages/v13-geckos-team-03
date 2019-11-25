@@ -33,6 +33,9 @@ export const signup = async formData => {
     return data;
   } catch (err) {
     console.log(err);
+    return {
+      errors: ["something went wrong!"]
+    };
   }
 };
 
@@ -54,5 +57,8 @@ export const login = async formData => {
     return data;
   } catch (err) {
     console.log(err);
+    return {
+      errors: ["something went wrong!"]
+    };
   }
 };
