@@ -14,9 +14,37 @@ const generateToken = user => {
   return token;
 };
 
-const signup = async (req, res) => {
+const validate = body => {
+  let messages = [];
+  if (!body.email) {
+    messages.push("email is required");
+  }
+  if (!body.password) {
+    messages.push("password is required");
+  }
+  return messages;
+};
+
+const signup = async (req, res, next) => {
+  const messages = validate(req.body);
+  if (messages.length) {
+    res.status(400).json({
+      messages: [...messages]
+    });
+    return;
+  }
+
   try {
     const hashedPassword = await hash(req.body.password, salt);
+    const userExists = await User.find({
+      email: req.body.email
+    });
+    if (userExists.length) {
+      res.status(400).json({
+        messages: ["email already signed up"]
+      });
+      return;
+    }
     const newUser = await User.create({
       email: req.body.email,
       password: hashedPassword
@@ -27,25 +55,20 @@ const signup = async (req, res) => {
     });
   } catch (err) {
     // !!! more than one type of error can happen here
-
-    // duplicate key mongo error
-    res.status(400).json({
-      message: "That email is already signed up"
-    });
+    // duplicate key?
+    next(err);
+    // res.status(400).json({
+    //   message: "That email is already signed up"
+    // });
     return;
   }
 };
 
 const login = async (req, res) => {
-  if (!req.body.email) {
+  const messages = validate(req.body);
+  if (messages.length) {
     res.status(400).json({
-      message: "email is required"
-    });
-    return;
-  }
-  if (!req.body.password) {
-    res.status(400).json({
-      message: "password is required"
+      messages: [...messages]
     });
     return;
   }
