@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^3.0.7",
     "cors": "^2.8.5",
     "cross-env": "^6.0.3",
     "dotenv": "^8.2.0",
