@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 import { signup } from "./Components/Network";
-import { Form, FormLabel } from "./StyledComponents/Forms";
+import { Form, FormLabel, Input, SubmitButton } from "./StyledComponents/Forms";
+
+const Container = styled.div`
+  padding: 30px 15px;
+  display: flex;
+  justify-content: center;
+`;
 
 export default function() {
   const [formState, updateFormState] = useState({
@@ -51,17 +58,18 @@ export default function() {
 
   const { email, password, confirmPassword, hasFocus } = formState;
   return (
-    <div>
+    <Container>
       <Form onSubmit={handleSubmit}>
-        <h3>sign up</h3>
+        <h3>Sign Up</h3>
         <div>
           <FormLabel
             htmlFor="email"
             hasFocus={hasFocus === "email" ? true : false}
+            // hasInput={email.length ? true : false}
           >
             email
           </FormLabel>
-          <input
+          <Input
             id="email"
             type="email"
             value={email}
@@ -69,16 +77,17 @@ export default function() {
             onBlur={handleBlur}
             onFocus={() => updateFocus("email")}
             required
-          ></input>
+          ></Input>
         </div>
         <div>
           <FormLabel
             htmlFor="password"
             hasFocus={hasFocus === "password" ? true : false}
+            hasInput={password.length ? true : false}
           >
             password
           </FormLabel>
-          <input
+          <Input
             id="password"
             type="password"
             value={password}
@@ -86,16 +95,17 @@ export default function() {
             onBlur={handleBlur}
             onFocus={() => updateFocus("password")}
             required
-          ></input>
+          ></Input>
         </div>
         <div>
           <FormLabel
             htmlFor="confirmPassword"
             hasFocus={hasFocus === "confirmPassword" ? true : false}
+            hasInput={confirmPassword.length ? true : false}
           >
             confirm password
           </FormLabel>
-          <input
+          <Input
             id="confirmPassword"
             type="password"
             value={confirmPassword}
@@ -103,10 +113,10 @@ export default function() {
             onBlur={handleBlur}
             onFocus={() => updateFocus("confirmPassword")}
             required
-          ></input>
+          ></Input>
         </div>
-        <button type="submit">signup</button>
+        <SubmitButton type="submit">Sign Up</SubmitButton>
       </Form>
-    </div>
+    </Container>
   );
 }
