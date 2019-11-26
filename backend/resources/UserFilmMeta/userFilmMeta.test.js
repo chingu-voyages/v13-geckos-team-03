@@ -73,9 +73,17 @@ describe("Resource - userFilmMeta", () => {
   });
 
   it("should return 401 not authorised if no valid jwt", async () => {
-    const res = await request.get("/api/user-film-meta");
-    expect(res.status).toBe(401);
-    expect(res.body.errors[0]).toBe("not authorised");
+    const getRes = await request.get("/api/user-film-meta");
+    expect(getRes.status).toBe(401);
+    expect(getRes.body.errors[0]).toBe("not authorised");
+
+    const postRes = await request.post("/api/user-film-meta");
+    expect(postRes.status).toBe(401);
+    expect(postRes.body.errors[0]).toBe("not authorised");
+
+    const deleteRes = await request.delete("/api/user-film-meta");
+    expect(deleteRes.status).toBe(401);
+    expect(deleteRes.body.errors[0]).toBe("not authorised");
   });
 
   it("GET Should return 200 with docs if valid request", async () => {
