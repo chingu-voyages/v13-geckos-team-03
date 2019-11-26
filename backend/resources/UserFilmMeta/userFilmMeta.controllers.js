@@ -1,22 +1,67 @@
-const createOne = (req, res) => {
-  res.json({ "POST request": req.body });
+const UserFilmMeta = require("./userFilmMeta.model");
+
+const createOne = async (req, res, next) => {
+  const userId = req.user._id;
+  const { filmId } = req.body;
+  if (!filmId) {
+    res.status(400).json({
+      errors: ["must provide film id"]
+    });
+    return;
+  }
+  try {
+    const doc = await UserFilmMeta.create({
+      userId: userId,
+      filmId
+    });
+    res.status(200).json(doc);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
 };
 
-const getOne = (req, res) => {
-  res.json({ "GET request": req.body });
+const getMany = async (req, res, next) => {
+  const _id = req.user._id;
+  try {
+    const docs = await UserFilmMeta.find({
+      userId: _id
+    });
+    res.status(200).json({ docs });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
 };
 
 const updateOne = (req, res) => {
   res.json({ "PUT request": req.body });
 };
 
-const deleteOne = (req, res) => {
-  res.json({ "DELETE request": req.body });
+const deleteOne = async (req, res, next) => {
+  const { filmId } = req.body;
+  if (!filmId) {
+    res.status(400).json({
+      errors: ["must provide film id"]
+    });
+    return;
+  }
+  try {
+    const doc = await UserFilmMeta.deleteOne({
+      _id: filmId
+    });
+    res.status(200).json(doc);
+  } catch (err) {
+    res.status(400).json({
+      errors: [err]
+    });
+    return;
+  }
 };
 
 module.exports = {
   createOne,
-  getOne,
+  getMany,
   updateOne,
   deleteOne
 };

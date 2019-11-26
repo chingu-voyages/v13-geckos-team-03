@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const User = require("./user.model");
 const hash = require("../../util/hash");
@@ -49,9 +49,13 @@ const signup = async (req, res, next) => {
       email: req.body.email,
       password: hashedPassword
     });
+    res.cookie("token", generateToken(newUser), {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year
+    });
     res.status(200).json({
       email: newUser.email,
-      token: generateToken(newUser)
+      _id: newUser._id
     });
   } catch (err) {
     next(err);
@@ -100,10 +104,14 @@ const login = async (req, res) => {
     return;
   }
 
+  res.cookie("token", generateToken(user), {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year
+  });
   // send response
   res.status(200).json({
     email: user.email,
-    token: generateToken(user)
+    _id: user._id
   });
 };
 

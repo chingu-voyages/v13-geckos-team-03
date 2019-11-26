@@ -28,8 +28,6 @@ beforeAll(async () => {
     email: existingUser.email,
     password: hashedPassword
   }).catch(err => console.log(err));
-
-  // const userDocs = await User.find();
 });
 
 describe("/api/signup", () => {
@@ -44,7 +42,7 @@ describe("/api/signup", () => {
     const res = await request.post("/api/signup").send(user1);
     expect(res.status).toBe(200);
     expect(res.body.email).toEqual(user1.email);
-    expect(typeof res.body.token).toBe("string");
+    expect(typeof res.body._id).toBe("string");
     const userDocs = await User.find();
     expect(userDocs.length).toBe(2);
   });
@@ -78,7 +76,7 @@ describe("/api/signup", () => {
 
 describe("/api/login", () => {
   it("wrong method should return 400", async () => {
-    const res = await request.get("/api/signup");
+    const res = await request.get("/api/login");
     expect(res.status).toBe(400);
   });
 
@@ -101,7 +99,7 @@ describe("/api/login", () => {
       password: "password"
     });
     expect(res.status).toBe(400);
-    expect(res.body.message).toBe("email not found");
+    expect(res.body.errors[0]).toBe("email not found");
   });
 
   it("should return 400 and correct message if password is incorrect", async () => {
@@ -110,13 +108,12 @@ describe("/api/login", () => {
       password: "wrongpassword"
     });
     expect(res.status).toBe(400);
-    expect(res.body.message).toBe("password incorrect");
+    expect(res.body.errors[0]).toBe("password incorrect");
   });
 
   it("valid login request should return 200 and user object with jwt", async () => {
     const res = await request.post("/api/login").send(existingUser);
     expect(res.status).toBe(200);
     expect(res.body.email).toEqual(existingUser.email);
-    expect(typeof res.body.token).toBe("string");
   });
 });

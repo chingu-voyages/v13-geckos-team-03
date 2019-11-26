@@ -19,7 +19,7 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export default function() {
+export default function({ logUserIn }) {
   const [formState, updateFormState] = useState({
     email: "",
     password: "",
@@ -73,6 +73,10 @@ export default function() {
         };
       });
     } else {
+      logUserIn({
+        email: data.email,
+        _id: data._id
+      });
       history.push("/myfilms");
     }
   };
