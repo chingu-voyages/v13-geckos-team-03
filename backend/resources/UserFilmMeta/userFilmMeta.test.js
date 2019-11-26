@@ -16,8 +16,14 @@ const existingUser = {
   password: "password"
 };
 
-let user;
-let token;
+let userHasNoMeta = {
+  email: "woo@laa.com",
+  password: "password",
+  token: jwt.sign({ _id: this._id, email: this.email }, process.env.APP_SECRET)
+};
+
+let userHasMeta;
+let docs;
 
 const catchErrors = res => {
   if (res.status !== 200) console.log("\n\nerrors in response: \n\n", res.body);
@@ -26,18 +32,38 @@ const catchErrors = res => {
 beforeAll(async () => {
   try {
     await mongoose.connection.dropDatabase();
+    // create a user
+    const hashedPassword = await hash(existingUser.password);
+    userHasMeta = await User.create({
+      email: existingUser.email,
+      password: hashedPassword
+    }).catch(err => console.log(err));
+    userHasMeta.token = jwt.sign(
+      { _id: userHasMeta._id, email: userHasMeta.email },
+      process.env.APP_SECRET
+    );
+    // save some records
+    docs = await UserFilmMeta.create([
+      {
+        filmId: "1",
+        userId: userHasMeta._id
+      },
+      {
+        filmId: "2",
+        userId: userHasMeta._id
+      },
+      {
+        filmId: "3",
+        userId: userHasMeta._id
+      },
+      {
+        filmId: "4",
+        userId: userHasMeta._id
+      }
+    ]);
   } catch (err) {
     console.log(err);
   }
-  const hashedPassword = await hash(existingUser.password);
-  user = await User.create({
-    email: existingUser.email,
-    password: hashedPassword
-  }).catch(err => console.log(err));
-  token = jwt.sign(
-    { _id: user._id, email: user.email },
-    process.env.APP_SECRET
-  );
 });
 
 describe("Resource - userFilmMeta", () => {
@@ -52,20 +78,83 @@ describe("Resource - userFilmMeta", () => {
     expect(res.body.errors[0]).toBe("not authorised");
   });
 
-  it("Should return 200 with doc if valid request", async () => {
+  it("GET Should return 200 with docs if valid request", async () => {
     const res = await request
       .get("/api/user-film-meta")
-      .set("Cookie", [`token=${token}`])
+      .set("Cookie", [`token=${userHasMeta.token}`]);
+    expect(res.status).toBe(200);
+    expect(res.body.docs.length).toBe(4);
+  });
+
+  it("GET should return 200 with no docs if user has no docs", async () => {
+    const res = await request
+      .get("/api/user-film-meta")
+      .set("Cookie", [`token=${userHasNoMeta.token}`]);
+    expect(res.status).toBe(200);
+    expect(res.body.docs.length).toBe(0);
+  });
+
+  it("POST should create a doc and return 200 with valid request", async () => {
+    const res = await request
+      .post("/api/user-film-meta")
+      .set("Cookie", [`token=${userHasMeta.token}`])
       .send({
-        filmId: "12345"
+        filmId: "a"
       });
     catchErrors(res);
     expect(res.status).toBe(200);
+    const docsAfter = await UserFilmMeta.find();
+    expect(docsAfter.length).toBe(5);
   });
 
-  // create user
-  // update user
-  // delete user
+  it("POST should return 400 if no filmId provided", async () => {
+    const res = await request
+      .post("/api/user-film-meta")
+      .set("Cookie", [`token=${userHasMeta.token}`])
+      .send({
+        no: "filmId"
+      });
+    expect(res.status).toBe(400);
+    const docsAfter = await UserFilmMeta.find();
+    expect(docsAfter.length).toBe(5);
+  });
+
+  it("DELETE should return 400 if no filmId provided", async () => {
+    const res = await request
+      .post("/api/user-film-meta")
+      .set("Cookie", [`token=${userHasMeta.token}`])
+      .send({
+        no: "filmId"
+      });
+    expect(res.status).toBe(400);
+    const docsAfter = await UserFilmMeta.find();
+    expect(docsAfter.length).toBe(5);
+  });
+
+  it("DELETE should return 400 if film id not found", async () => {
+    const res = await request
+      .delete("/api/user-film-meta")
+      .set("Cookie", [`token=${userHasMeta.token}`])
+      .send({
+        filmId: "someid"
+      });
+    expect(res.status).toBe(400);
+    const docsAfter = await UserFilmMeta.find();
+    expect(docsAfter.length).toBe(5);
+  });
+
+  it("DELETE should return 200 and delete record with valid request", async () => {
+    const res = await request
+      .delete("/api/user-film-meta")
+      .set("Cookie", [`token=${userHasMeta.token}`])
+      .send({
+        filmId: docs[0]._id
+      });
+    catchErrors(res);
+    expect(res.status).toBe(200);
+    const docsAfter = await UserFilmMeta.find();
+    expect(docsAfter.length).toBe(4);
+  });
 });
 
 describe("Misc tests", () => {
