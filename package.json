@@ -3,20 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bcrypt": "^3.0.7",
+    "cors": "^2.8.5",
+    "cross-env": "^6.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "gh-pages": "^2.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.12",
+    "morgan": "^1.9.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-inlinesvg": "^1.1.7",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "styled-components": "^4.4.1",
-    "styled-icons": "^8.6.0"
+    "styled-icons": "^8.6.0",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "MODE=development node backend/index.js",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cross-env MODE=test jest --watch",
     "eject": "react-scripts eject",
+    "server-dev": "cross-env MODE=development nodemon backend/index.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
@@ -33,6 +48,12 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
     ]
   },
   "homepage": "https://chingu-voyages.github.io/v13-geckos-team-03"

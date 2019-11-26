@@ -71,6 +71,8 @@ class Header extends Component {
         <Links>
           <li><StyledNavLink exact to="/search" activeClassName="active">search</StyledNavLink></li>
           <li><StyledNavLink exact to="/myfilms" activeClassName="active">my films</StyledNavLink></li>
+          <li><StyledNavLink exact to="/signup" activeClassName="active">signup</StyledNavLink></li>
+          <li><StyledNavLink exact to="/login" activeClassName="active">login</StyledNavLink></li>
         </Links>
         <SettingsButton aria-label="settings button"><SettingsSVG src={settings} /></SettingsButton>
       </NavBar>
