@@ -51,7 +51,8 @@ const signup = async (req, res, next) => {
     });
     res.status(200).json({
       email: newUser.email,
-      token: generateToken(newUser)
+      token: generateToken(newUser),
+      _id: newUser._id
     });
   } catch (err) {
     next(err);
@@ -103,7 +104,8 @@ const login = async (req, res) => {
   // send response
   res.status(200).json({
     email: user.email,
-    token: generateToken(user)
+    token: generateToken(user),
+    _id: user._id
   });
 };
 

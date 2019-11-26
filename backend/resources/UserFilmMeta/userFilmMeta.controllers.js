@@ -2,8 +2,9 @@ const createOne = (req, res) => {
   res.json({ "POST request": req.body });
 };
 
-const getOne = (req, res) => {
-  res.json({ "GET request": req.body });
+const getMany = (req, res) => {
+  console.log(req.body.userId);
+  res.json({ "GET many meta": req.body });
 };
 
 const updateOne = (req, res) => {
@@ -16,7 +17,7 @@ const deleteOne = (req, res) => {
 
 module.exports = {
   createOne,
-  getOne,
+  getMany,
   updateOne,
   deleteOne
 };

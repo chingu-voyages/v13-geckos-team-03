@@ -12,10 +12,11 @@ Router.route("/login")
   .post(AuthControllers.login)
   .all(badRequest);
 
-Router.route("/user")
+Router.route("/user-film-meta")
   .post(UserFilmMetaControllers.createOne)
-  .get(UserFilmMetaControllers.getOne)
+  .get(UserFilmMetaControllers.getMany)
   .put(UserFilmMetaControllers.updateOne)
-  .delete(UserFilmMetaControllers.deleteOne);
+  .delete(UserFilmMetaControllers.deleteOne)
+  .all(badRequest);
 
 module.exports = Router;
