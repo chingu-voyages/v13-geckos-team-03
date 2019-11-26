@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, useHistory } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
 import Header from "./Components/Header/header";
@@ -23,6 +23,8 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   const [user, updateUser] = useState({ user: false });
 
+  // const history = useHistory();
+
   const logUserIn = newUser => {
     updateUser(user => {
       return {
@@ -33,11 +35,19 @@ function App() {
     });
   };
 
+  const logUserOut = () => {
+    updateUser(() => {
+      return {
+        user: false
+      };
+    });
+  };
+
   return (
     <>
       <GlobalStyle />
       <BrowserRouter basename="/v13-geckos-team-03">
-        <Header user={user} />
+        <Header user={user} logUserOut={logUserOut} />
         <Route exact path="/" component={HomePageView} />
         <Route exact path="/search" component={SearchView} />
         <Route path="/myfilms" component={MyFilmsView} />

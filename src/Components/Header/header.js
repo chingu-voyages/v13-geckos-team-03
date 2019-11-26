@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React from "react";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import SVG from "react-inlinesvg";
 import settings from "./cog.svg";
@@ -63,7 +63,12 @@ const SettingsSVG = styled(SVG)`
   fill: rgb(255, 255, 255, 0.64);
 `;
 
-export default function({ user }) {
+export default function({ user, logUserOut }) {
+  const history = useHistory();
+  const handleLogout = () => {
+    logUserOut();
+    history.push("/");
+  };
   return (
     <NavBar>
       <Logo to="/">
@@ -96,6 +101,18 @@ export default function({ user }) {
               </StyledNavLink>
             </li>
           </>
+        )}
+        {user.user && (
+          <li>
+            <StyledNavLink
+              exact
+              to="/logout"
+              onClick={handleLogout}
+              activeClassName="active"
+            >
+              logout
+            </StyledNavLink>
+          </li>
         )}
       </Links>
       <SettingsButton aria-label="settings button">
