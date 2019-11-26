@@ -1,5 +1,6 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
 const hash = require("../../util/hash");
 
@@ -10,25 +11,34 @@ const supertest = require("supertest");
 
 const request = supertest(app);
 
-// const existingUser = {
-//   email: "existing@example.com",
-//   password: "password"
-// };
+const existingUser = {
+  email: "existing@example.com",
+  password: "password"
+};
 
-// beforeAll(async () => {
-//   try {
-//     await mongoose.connection.dropDatabase();
-//   } catch (err) {
-//     console.log(err);
-//   }
-//   const hashedPassword = await hash(existingUser.password);
-//   await User.create({
-//     email: existingUser.email,
-//     password: hashedPassword
-//   }).catch(err => console.log(err));
+let user;
+let token;
 
-//   // const userDocs = await User.find();
-// });
+const catchErrors = res => {
+  if (res.status !== 200) console.log("\n\nerrors in response: \n\n", res.body);
+};
+
+beforeAll(async () => {
+  try {
+    await mongoose.connection.dropDatabase();
+  } catch (err) {
+    console.log(err);
+  }
+  const hashedPassword = await hash(existingUser.password);
+  user = await User.create({
+    email: existingUser.email,
+    password: hashedPassword
+  }).catch(err => console.log(err));
+  token = jwt.sign(
+    { _id: user._id, email: user.email },
+    process.env.APP_SECRET
+  );
+});
 
 describe("Resource - userFilmMeta", () => {
   it("wrong method should return 400", async () => {
@@ -42,8 +52,18 @@ describe("Resource - userFilmMeta", () => {
     expect(res.body.errors[0]).toBe("not authorised");
   });
 
+  it("Should return 200 with doc if valid request", async () => {
+    const res = await request
+      .get("/api/user-film-meta")
+      .set("Cookie", [`token=${token}`])
+      .send({
+        filmId: "12345"
+      });
+    catchErrors(res);
+    expect(res.status).toBe(200);
+  });
+
   // create user
-  // get user
   // update user
   // delete user
 });
