@@ -42,7 +42,6 @@ describe("/api/signup", () => {
     const res = await request.post("/api/signup").send(user1);
     expect(res.status).toBe(200);
     expect(res.body.email).toEqual(user1.email);
-    expect(typeof res.body.token).toBe("string");
     expect(typeof res.body._id).toBe("string");
     const userDocs = await User.find();
     expect(userDocs.length).toBe(2);
@@ -116,6 +115,5 @@ describe("/api/login", () => {
     const res = await request.post("/api/login").send(existingUser);
     expect(res.status).toBe(200);
     expect(res.body.email).toEqual(existingUser.email);
-    expect(typeof res.body.token).toBe("string");
   });
 });
