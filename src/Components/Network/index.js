@@ -65,6 +65,20 @@ export const login = async formData => {
   }
 };
 
+export const pingUser = async () => {
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/user-film-meta`, {
+      method: "GET",
+      credentials: "include"
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+};
+
 export const getMeta = async () => {
   try {
     const res = await fetch(`${BACKEND_URL}/api/user-film-meta`, {
