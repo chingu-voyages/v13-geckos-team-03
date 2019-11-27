@@ -23,7 +23,7 @@ Router.route("/login")
   .all(badRequest);
 
 Router.route("/user")
-  .get(AuthControllers.getUser)
+  .get(protect, AuthControllers.getUser)
   .all(badRequest);
 
 Router.route("/user-film-meta")
