@@ -125,11 +125,9 @@ const login = async (req, res) => {
 
 const getUser = async (req, res, next) => {
   try {
-    console.log(req.body.userId);
-    const user = await User.findById({ _id: req.body.userId });
-    console.log(user);
+    const user = await User.findById({ _id: req.user._id });
     res.status(200).json({
-      user: "boop"
+      user
     });
   } catch (err) {
     console.log(err);
