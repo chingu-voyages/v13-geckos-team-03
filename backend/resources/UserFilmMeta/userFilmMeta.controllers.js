@@ -39,16 +39,16 @@ const updateOne = (req, res) => {
 };
 
 const deleteOne = async (req, res, next) => {
-  const { film_id } = req.body;
-  if (!film_id) {
+  const { docId } = req.body;
+  if (!docId) {
     res.status(400).json({
-      errors: ["must provide film_id"]
+      errors: ["must provide docId"]
     });
     return;
   }
   try {
     const doc = await UserFilmMeta.deleteOne({
-      _id: film_id
+      _id: docId
     });
     res.status(200).json(doc);
   } catch (err) {

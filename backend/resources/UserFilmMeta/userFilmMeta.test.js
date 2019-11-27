@@ -127,12 +127,12 @@ describe("Resource - userFilmMeta", () => {
     expect(docsAfter.length).toBe(5);
   });
 
-  it("DELETE should return 400 if no filmId provided", async () => {
+  it("DELETE should return 400 if no userFilmMetaId provided", async () => {
     const res = await request
       .post("/api/user-film-meta")
       .set("Cookie", [`token=${userHasMeta.token}`])
       .send({
-        no: "filmId"
+        no: "userFilmMetaId"
       });
     expect(res.status).toBe(400);
     const docsAfter = await UserFilmMeta.find();
@@ -144,7 +144,7 @@ describe("Resource - userFilmMeta", () => {
       .delete("/api/user-film-meta")
       .set("Cookie", [`token=${userHasMeta.token}`])
       .send({
-        filmId: "someid"
+        docId: "someid"
       });
     expect(res.status).toBe(400);
     const docsAfter = await UserFilmMeta.find();
@@ -156,7 +156,7 @@ describe("Resource - userFilmMeta", () => {
       .delete("/api/user-film-meta")
       .set("Cookie", [`token=${userHasMeta.token}`])
       .send({
-        film_id: docs[0]._id
+        docId: docs[0]._id
       });
     catchErrors(res);
     expect(res.status).toBe(200);
