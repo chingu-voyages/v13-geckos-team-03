@@ -65,9 +65,22 @@ export const login = async formData => {
   }
 };
 
+export const requestLogout = async () => {
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/logout`, {
+      method: "GET",
+      credentials: "include"
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return new Error(err);
+  }
+};
+
 export const pingUser = async () => {
   try {
-    const res = await fetch(`${BACKEND_URL}/api/user-film-meta`, {
+    const res = await fetch(`${BACKEND_URL}/api/user`, {
       method: "GET",
       credentials: "include"
     });
@@ -75,7 +88,6 @@ export const pingUser = async () => {
     return data;
   } catch (err) {
     console.log(err);
-    return false;
   }
 };
 

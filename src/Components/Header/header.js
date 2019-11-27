@@ -2,6 +2,9 @@ import React from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import SVG from "react-inlinesvg";
+
+import { requestLogout } from "../Network";
+
 import settings from "./cog.svg";
 
 const NavBar = styled.nav`
@@ -43,14 +46,12 @@ const StyledNavLink = styled(NavLink)`
     color: #ccc;
   }
 
-  &.attrs({activeclassname: 'active'})
-  color: #ffff;
-
   &.active {
     color: #ffff;
     border-bottom: 1px solid rgb(255, 255, 255, 0.64);
   }
 `;
+
 const SettingsButton = styled.button`
   margin-right: 10rem;
   background-color: #3b3272;
@@ -65,10 +66,21 @@ const SettingsSVG = styled(SVG)`
 
 export default function({ user, logUserOut }) {
   const history = useHistory();
-  const handleLogout = () => {
-    logUserOut();
-    history.push("/");
+
+  const handleLogout = async () => {
+    try {
+      const res = await requestLogout();
+      if (res.errors) {
+        console.error(res.errors);
+        return;
+      }
+      logUserOut();
+      history.push("/");
+    } catch (err) {
+      console.error(err);
+    }
   };
+
   return (
     <NavBar>
       <Logo to="/">
