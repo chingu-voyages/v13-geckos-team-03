@@ -22,6 +22,7 @@ export const signup = async formData => {
       headers: {
         "Content-Type": "application/json"
       },
+      credentials: "include",
       body: JSON.stringify(formData)
     });
     const data = await res.json();
@@ -46,6 +47,7 @@ export const login = async formData => {
       headers: {
         "Content-Type": "application/json"
       },
+      credentials: "include",
       body: JSON.stringify(formData)
     });
     const data = await res.json();
@@ -56,9 +58,22 @@ export const login = async formData => {
     }
     return data;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return {
       errors: ["something went wrong!"]
     };
+  }
+};
+
+export const getMeta = async () => {
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/user-film-meta`, {
+      method: "GET",
+      credentials: "include"
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error(err);
   }
 };
