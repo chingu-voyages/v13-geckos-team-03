@@ -123,6 +123,13 @@ const login = async (req, res) => {
   return;
 };
 
+const logout = (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({
+    messages: ["logged out successfully"]
+  });
+};
+
 const getUser = async (req, res, next) => {
   try {
     const user = await User.findById({ _id: req.user._id });
@@ -135,4 +142,4 @@ const getUser = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, login, getUser };
+module.exports = { signup, login, logout, getUser };
