@@ -156,7 +156,7 @@ describe("Resource - userFilmMeta", () => {
       .delete("/api/user-film-meta")
       .set("Cookie", [`token=${userHasMeta.token}`])
       .send({
-        filmId: docs[0]._id
+        film_id: docs[0]._id
       });
     catchErrors(res);
     expect(res.status).toBe(200);
