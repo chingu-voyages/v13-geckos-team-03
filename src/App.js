@@ -66,8 +66,8 @@ function App() {
       }
       logUserIn({
         user: true,
-        email: res.email,
-        _id: res._id
+        email: res.user.email,
+        _id: res.user._id
       });
     })();
   }, []);
