@@ -62,7 +62,6 @@ function App() {
     (async () => {
       const res = await pingUser();
       if (res.errors) {
-        console.log(res.errors);
         return;
       }
       logUserIn({
