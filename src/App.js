@@ -44,17 +44,32 @@ function App() {
   };
 
   const handleGetMeta = async () => {
-    const res = getMeta();
-    console.log(res);
+    const res = await getMeta();
+    if (res.errors) {
+      console.log(res.errors);
+    }
+    if (res.docs.length) {
+      updateUser(user => {
+        return {
+          ...user,
+          films: [...res.docs]
+        };
+      });
+    }
   };
 
   useEffect(() => {
     (async () => {
       const res = await pingUser();
-      console.log(res);
-      if (res.user) {
-        logUserIn(res.user);
+      if (res.errors) {
+        console.log(res.errors);
+        return;
       }
+      logUserIn({
+        user: true,
+        email: res.email,
+        _id: res._id
+      });
     })();
   }, []);
 
