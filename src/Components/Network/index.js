@@ -1,6 +1,8 @@
 import APIKEY from "../../apikey.js";
 import { BACKEND_URL } from "../../config";
 
+import xawf from "./xawf";
+
 export const searchFilmTitle = async (value, currentPage) => {
   const searchText = value.replace(/ /, "+");
   try {
@@ -16,28 +18,9 @@ export const searchFilmTitle = async (value, currentPage) => {
 };
 
 export const signup = async formData => {
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: "include",
-      body: JSON.stringify(formData)
-    });
-    const data = await res.json();
-    if (res.status !== 200) {
-      return {
-        errors: [...data.errors]
-      };
-    }
-    return data;
-  } catch (err) {
-    console.log(err);
-    return {
-      errors: ["something went wrong!"]
-    };
-  }
+  console.log(formData);
+  const data = await xawf.POST("/signup", formData);
+  return data;
 };
 
 export const login = async formData => {
