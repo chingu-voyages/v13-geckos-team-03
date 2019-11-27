@@ -6,22 +6,45 @@ Add-project-description-here | Voyage-13 | https://chingu.io/ | Twitter: https:/
 
 user in dev db with some meta records:
 
-woobles@balala.com
-password
+woobles@balala.com - password is password
 
-### Get Hearts
+## Authentication
 
-GET /api/user-film-meta
+On sucessfully logging in a cookie is attached to the response and is stored in the browser automatically.
 
-returns hearts for logged in user
+This can be attached to requests made in the browser adding `'credentials: 'indlude` to the fetch options:
 
-### Toggle Hearts
+```js
+const res = await fetch(`${BACKEND_URL}/api/logout`, {
+  method: "GET",
+  credentials: "include"
+});
+```
 
-save a heart:
+## /api/user-film-meta
 
-POST -> /api/user-film-meta
--> body: { filmId: filmId }
+#### GET /api/user-film-meta
 
-remove a heart:
+Return all `userFilmMeta` records for the logged in user.
 
-DELETE -> /api/user-film-meta - body = { film_id: film_id }
+#### POST /api/user-film-meta
+
+Creates a `userFilmMeta` record for logged in user storing movie database id.
+
+```js
+body: {
+  filmId: ????
+}
+```
+
+`filmId` is movie database film id
+
+#### DELETE /api/user-film-meta
+
+`docId` is value of `_id` for the record to be deleted (mongodb document id)
+
+```js
+body: {
+  docId: ????
+}
+```
