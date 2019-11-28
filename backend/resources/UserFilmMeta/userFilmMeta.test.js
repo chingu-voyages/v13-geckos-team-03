@@ -127,30 +127,6 @@ describe("Resource - userFilmMeta", () => {
     expect(docsAfter.length).toBe(5);
   });
 
-  it("DELETE should return 400 if no userFilmMetaId provided", async () => {
-    const res = await request
-      .post("/api/user-film-meta")
-      .set("Cookie", [`token=${userHasMeta.token}`])
-      .send({
-        no: "userFilmMetaId"
-      });
-    expect(res.status).toBe(400);
-    const docsAfter = await UserFilmMeta.find();
-    expect(docsAfter.length).toBe(5);
-  });
-
-  it("DELETE should return 400 if film id not found", async () => {
-    const res = await request
-      .delete("/api/user-film-meta")
-      .set("Cookie", [`token=${userHasMeta.token}`])
-      .send({
-        docId: "someid"
-      });
-    expect(res.status).toBe(400);
-    const docsAfter = await UserFilmMeta.find();
-    expect(docsAfter.length).toBe(5);
-  });
-
   it("DELETE should return 200 and delete record with valid request", async () => {
     const res = await request
       .delete("/api/user-film-meta")
@@ -163,14 +139,28 @@ describe("Resource - userFilmMeta", () => {
     const docsAfter = await UserFilmMeta.find();
     expect(docsAfter.length).toBe(4);
   });
-});
 
-describe("Misc tests", () => {
-  // !!! This should be moved at some point as it has nothing to do with the user resource
-  it("routes that don't exist should return 404", async () => {
-    const cheeseRes = await request.get("/api/cheese");
-    expect(cheeseRes.status).toBe(404);
-    const userRes = await request.get("/user");
-    expect(userRes.status).toBe(404);
+  it("DELETE should return 400 if no docId provided", async () => {
+    const res = await request
+      .post("/api/user-film-meta")
+      .set("Cookie", [`token=${userHasMeta.token}`])
+      .send({
+        no: "docId"
+      });
+    expect(res.status).toBe(400);
+    const docsAfter = await UserFilmMeta.find();
+    expect(docsAfter.length).toBe(4);
+  });
+
+  it("DELETE should return 400 if film id not found", async () => {
+    const res = await request
+      .delete("/api/user-film-meta")
+      .set("Cookie", [`token=${userHasMeta.token}`])
+      .send({
+        docId: docs[0]._id
+      });
+    expect(res.status).toBe(400);
+    const docsAfter = await UserFilmMeta.find();
+    expect(docsAfter.length).toBe(4);
   });
 });
