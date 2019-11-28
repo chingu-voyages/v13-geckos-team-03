@@ -27,7 +27,8 @@ function SetupMiddleware(app) {
       : process.env.PROD_FRONTEND_URL;
   app.use(
     cors({
-      origin
+      origin: origin,
+      credentials: true
     })
   );
   app.use(parseToken);

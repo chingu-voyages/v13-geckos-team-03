@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
 import Header from "./Components/Header/header";
 import Footer from "./Components/Footer/footer";
+import { getMeta, pingUser } from "./Components/Network";
 import SearchView from "./SearchView";
 import MyFilmsView from "./MyFilmsView";
 import HomePageView from "./HomePageView";
@@ -23,10 +24,9 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   const [user, updateUser] = useState({ user: false });
 
-  // const history = useHistory();
-
   const logUserIn = newUser => {
-    updateUser(user => {
+    handleGetMeta();
+    updateUser(() => {
       return {
         user: true,
         email: newUser.email,
@@ -42,6 +42,35 @@ function App() {
       };
     });
   };
+
+  const handleGetMeta = async () => {
+    const res = await getMeta();
+    if (res.errors) {
+      console.log(res.errors);
+    }
+    if (res.docs.length) {
+      updateUser(user => {
+        return {
+          ...user,
+          films: [...res.docs]
+        };
+      });
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      const res = await pingUser();
+      if (res.errors) {
+        return;
+      }
+      logUserIn({
+        user: true,
+        email: res.user.email,
+        _id: res.user._id
+      });
+    })();
+  }, []);
 
   return (
     <>

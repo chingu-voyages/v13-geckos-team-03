@@ -64,6 +64,12 @@ const signup = async (req, res, next) => {
 };
 
 const login = async (req, res) => {
+  if (req.user) {
+    res.status(400).json({
+      errors: ["already logged in"]
+    });
+    return;
+  }
   const messages = validate(req.body);
   if (messages.length) {
     res.status(400).json({
@@ -104,7 +110,8 @@ const login = async (req, res) => {
     return;
   }
 
-  res.cookie("token", generateToken(user), {
+  const token = generateToken(user);
+  res.cookie("token", token, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year
   });
@@ -113,6 +120,26 @@ const login = async (req, res) => {
     email: user.email,
     _id: user._id
   });
+  return;
 };
 
-module.exports = { signup, login };
+const logout = (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({
+    messages: ["logged out successfully"]
+  });
+};
+
+const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById({ _id: req.user._id });
+    res.status(200).json({
+      user
+    });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+
+module.exports = { signup, login, logout, getUser };

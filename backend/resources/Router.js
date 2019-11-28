@@ -22,6 +22,14 @@ Router.route("/login")
   .post(AuthControllers.login)
   .all(badRequest);
 
+Router.route("/logout")
+  .get(AuthControllers.logout)
+  .all(badRequest);
+
+Router.route("/user")
+  .get(protect, AuthControllers.getUser)
+  .all(badRequest);
+
 Router.route("/user-film-meta")
   .post(protect, UserFilmMetaControllers.createOne)
   .get(protect, UserFilmMetaControllers.getMany)

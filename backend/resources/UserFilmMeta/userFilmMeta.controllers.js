@@ -5,7 +5,7 @@ const createOne = async (req, res, next) => {
   const { filmId } = req.body;
   if (!filmId) {
     res.status(400).json({
-      errors: ["must provide film id"]
+      errors: ["must provide filmId"]
     });
     return;
   }
@@ -39,16 +39,16 @@ const updateOne = (req, res) => {
 };
 
 const deleteOne = async (req, res, next) => {
-  const { filmId } = req.body;
-  if (!filmId) {
+  const { docId } = req.body;
+  if (!docId) {
     res.status(400).json({
-      errors: ["must provide film id"]
+      errors: ["must provide docId"]
     });
     return;
   }
   try {
     const doc = await UserFilmMeta.deleteOne({
-      _id: filmId
+      _id: docId
     });
     res.status(200).json(doc);
   } catch (err) {
