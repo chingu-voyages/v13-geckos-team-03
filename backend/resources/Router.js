@@ -16,19 +16,19 @@ const protect = (req, res, next) => {
 };
 
 Router.route("/signup")
-  .post(AuthControllers.signup)
+  .post(expressCallback(AuthControllers.signup))
   .all(expressCallback(badRequest));
 
 Router.route("/login")
-  .post(AuthControllers.login)
+  .post(expressCallback(AuthControllers.login))
   .all(expressCallback(badRequest));
 
 Router.route("/logout")
-  .get(AuthControllers.logout)
+  .get(expressCallback(AuthControllers.logout))
   .all(expressCallback(badRequest));
 
 Router.route("/user")
-  .get(protect, AuthControllers.getUser)
+  .get(protect, expressCallback(AuthControllers.getUser))
   .all(expressCallback(badRequest));
 
 Router.route("/user-film-meta")

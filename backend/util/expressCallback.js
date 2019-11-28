@@ -19,10 +19,12 @@ module.exports = controller => {
         if (httpResponse.headers) {
           res.set(httpResponse.headers);
         }
+        if (httpResponse.cookie) {
+          res.cookie("token", httpResponse.cookie);
+        }
         res.status(httpResponse.statusCode).json(httpResponse.body);
       })
       .catch(err => {
-        console.log(err);
         res.status(500).send({ error: "Something went wrong" });
       });
   };
