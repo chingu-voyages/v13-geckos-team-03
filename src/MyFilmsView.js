@@ -7,8 +7,9 @@ export default function() {
   const [userData, setUserData] = useState([]);
   const [filmData, setFilmData] = useState({});
 
+  // get the films that the user have favourited from the server
   useEffect(() => {
-    const getUserData = async () => {
+    const fetchUserData = async () => {
       const res = await fetch(`${BACKEND_URL}/api/user-film-meta`, {
         method: "GET",
         credentials: "include"
@@ -16,26 +17,27 @@ export default function() {
       const data = await res.json();
       setUserData(data.docs);
     };
-    getUserData();
+    fetchUserData();
   }, []);
 
+  // fetch data on the films (the user have favourited) from the API and put it in state
   useEffect(() => {
-    const getFilmData = async id => {
+    if (userData.length === 0) {
+      return;
+    }
+    const getFilmData = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`
+        `https://api.themoviedb.org/3/movie/${userData[4].filmId}?api_key=${APIKEY}`
       );
       const data = await res.json();
-
-      setFilmData(data);
-      //console.log(filmData);
+      console.log(data);
     };
-    getFilmData(944);
-  }, []);
+    getFilmData();
+  }, [userData]);
 
   return (
     <div>
       <h1>My Films View</h1>
-      {filmData.original_title}
     </div>
   );
 }
