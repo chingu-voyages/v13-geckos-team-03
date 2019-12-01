@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Results from "./Components/Results/Results";
 
 import APIKEY from "./apikey.js";
 import { BACKEND_URL } from "./config";
@@ -40,6 +41,7 @@ export default function() {
   return (
     <div>
       <h1>My Films View</h1>
+      {filmData && <Results searchResults={filmData} />}
     </div>
   );
 }
