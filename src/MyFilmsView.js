@@ -5,7 +5,7 @@ import { BACKEND_URL } from "./config";
 
 export default function() {
   const [userData, setUserData] = useState([]);
-  const [filmData, setFilmData] = useState({});
+  const [filmData, setFilmData] = useState([]);
 
   // get the films that the user have favourited from the server
   useEffect(() => {
@@ -25,14 +25,16 @@ export default function() {
     if (userData.length === 0) {
       return;
     }
-    const getFilmData = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${userData[4].filmId}?api_key=${APIKEY}`
-      );
-      const data = await res.json();
-      console.log(data);
+    const fetchFilmData = async () => {
+      for (let i = 0; i < userData.length; i++) {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/${userData[i].filmId}?api_key=${APIKEY}`
+        );
+        const data = await res.json();
+        setFilmData(prevData => [...prevData, data]);
+      }
     };
-    getFilmData();
+    fetchFilmData();
   }, [userData]);
 
   return (
