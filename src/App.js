@@ -78,14 +78,14 @@ function App() {
       <BrowserRouter basename="/v13-geckos-team-03">
         <Header user={user} logUserOut={logUserOut} />
         <Route exact path="/">
-          <HomePageView />
+          <HomePageView hasUser={user.user} />
         </Route>
         <Route exact path="/search">
-          <SearchView />
+          <SearchView hasUser={user.user} />
         </Route>
         <Route path="/myfilms">
           <MyFilmsView />
-        </Route> 
+        </Route>
         <Route
           path="/signup"
           render={() => <SignupView logUserIn={logUserIn} />}

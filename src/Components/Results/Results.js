@@ -21,6 +21,7 @@ function Results(props) {
           voteAverage={result.vote_average}
           voteCount={result.vote_count}
           overview={result.overview}
+          hasUser={props.hasUser}
         />
       ))}
     </Container>
