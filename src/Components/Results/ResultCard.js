@@ -75,23 +75,25 @@ function ResultCard(props) {
         {props.poster.slice(-4) === "null" ? ( //display a image logo if there is no poster from the database
           <FileImage size="60" color="gray" />
         ) : (
-          <img // display the corresponding poster for the movie
-            src={`${props.poster}`}
-            alt="Movie Poster"
-            width="185"
-            height="278"
-            style={{ objectFit: "cover" }}
-          />
-        )}
+            <img // display the corresponding poster for the movie
+              src={`${props.poster}`}
+              alt="Movie Poster"
+              width="185"
+              height="278"
+              style={{ objectFit: "cover" }}
+            />
+          )}
       </Poster>
       <Info>
         <Top>
           <Title>{props.title}</Title>
-          {props.isFavourite ? (
-            <FullHeart size="25" />
-          ) : (
-            <EmptyHeart size="24" />
-          )}
+          {props.hasUser ?
+            (props.isFavourite ? (
+              <FullHeart size="25" />
+            ) : (
+                <EmptyHeart size="24" />
+              ))
+            : null}
         </Top>
 
         <Year>

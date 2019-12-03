@@ -20,7 +20,7 @@ const Dropdown = styled.select`
   }
 `;
 
-export default function() {
+export default function(props) {
   const [results, setResults] = useState([]);
   const [popOrTop, setPopOrTop] = useState(["popular"]);
 
@@ -52,7 +52,7 @@ export default function() {
         <option value="top_rated">Top Rated</option>
       </Dropdown>
 
-      {results.length === 0 ? null : <Results searchResults={results} />}
+      {results.length === 0 ? null : <Results searchResults={results}  hasUser={props.hasUser} />}
     </div>
   );
 }
