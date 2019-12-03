@@ -5,12 +5,12 @@ import Results from "./Components/Results/Results";
 import GoUpButton from "./Components/BackToTopButton/backtotopbutton.js";
 
 
-export default function() {
+export default function(props) {
   const [results, updateResults] = useState([]);
   return (
     <div>
       <SearchBar updateResults={updateResults} />
-      {results && <Results searchResults={results} />}
+      {results && <Results searchResults={results}  hasUser={props.hasUser} />}
       <GoUpButton></GoUpButton>
     </div>
   );

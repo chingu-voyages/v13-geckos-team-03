@@ -77,9 +77,15 @@ function App() {
       <GlobalStyle />
       <BrowserRouter basename="/v13-geckos-team-03">
         <Header user={user} logUserOut={logUserOut} />
-        <Route exact path="/" component={HomePageView} />
-        <Route exact path="/search" component={SearchView} />
-        <Route path="/myfilms" component={MyFilmsView} />
+        <Route exact path="/">
+          <HomePageView hasUser={user.user} />
+        </Route>
+        <Route exact path="/search">
+          <SearchView hasUser={user.user} />
+        </Route>
+        <Route path="/myfilms">
+          <MyFilmsView />
+        </Route>
         <Route
           path="/signup"
           render={() => <SignupView logUserIn={logUserIn} />}
