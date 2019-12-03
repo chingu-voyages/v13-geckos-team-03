@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import Results from "./Components/Results/Results";
+import GoUpButton from "./Components/BackToTopButton/backtotopbutton.js";
 import APIKEY from "./apikey.js";
 
 const Dropdown = styled.select`
@@ -9,7 +10,7 @@ const Dropdown = styled.select`
   margin: 30px auto;
   font-size: 34px;
   border: none;
-  border-bottom: #3B3272 solid
+  border-bottom: #3B3272 solid;
   color: #3B3272;
   outline: none;
   &:hover {
@@ -20,7 +21,7 @@ const Dropdown = styled.select`
   }
 `;
 
-export default function() {
+export default function(props) {
   const [results, setResults] = useState([]);
   const [popOrTop, setPopOrTop] = useState(["popular"]);
 
@@ -52,7 +53,8 @@ export default function() {
         <option value="top_rated">Top Rated</option>
       </Dropdown>
 
-      {results.length === 0 ? null : <Results searchResults={results} />}
+      {results.length === 0 ? null : <Results searchResults={results}  hasUser={props.hasUser} />}
+      <GoUpButton></GoUpButton>
     </div>
   );
 }
