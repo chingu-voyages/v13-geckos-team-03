@@ -13,7 +13,7 @@ app.use("/api", Router);
 // Return 404 if no routes match
 app.all(
   "*",
-  expressCallback(() => {
+  expressCallback(async () => {
     return {
       statusCode: 404,
       body: {
