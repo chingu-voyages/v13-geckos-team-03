@@ -1,3 +1,8 @@
-module.exports = (req, res) => {
-  res.status(400).json({ errors: ["bad request"] });
+module.exports = async req => {
+  return {
+    statusCode: 400,
+    body: {
+      errors: ["nothing like that for you here"]
+    }
+  };
 };

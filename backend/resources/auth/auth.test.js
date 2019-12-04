@@ -80,6 +80,12 @@ describe("/api/login", () => {
     expect(res.status).toBe(400);
   });
 
+  it("valid login request should return 200 and user object with jwt", async () => {
+    const res = await request.post("/api/login").send(existingUser);
+    expect(res.status).toBe(200);
+    expect(res.body.doc.email).toEqual(existingUser.email);
+  });
+
   it("Should return 400 if email or password are missing", async () => {
     const res1 = await request.post("/api/login").send({
       email: "some@email.com",
@@ -102,18 +108,12 @@ describe("/api/login", () => {
     expect(res.body.errors[0]).toBe("email not found");
   });
 
-  it("should return 400 and correct message if password is incorrect", async () => {
+  it("should return 401 and correct message if password is incorrect", async () => {
     const res = await request.post("/api/login").send({
       email: existingUser.email,
       password: "wrongpassword"
     });
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(401);
     expect(res.body.errors[0]).toBe("password incorrect");
-  });
-
-  it("valid login request should return 200 and user object with jwt", async () => {
-    const res = await request.post("/api/login").send(existingUser);
-    expect(res.status).toBe(200);
-    expect(res.body.email).toEqual(existingUser.email);
   });
 });

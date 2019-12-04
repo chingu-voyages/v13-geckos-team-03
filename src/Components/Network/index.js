@@ -1,5 +1,6 @@
 import APIKEY from "../../apikey.js";
-import { BACKEND_URL } from "../../config";
+
+import xawf from "./xawf";
 
 export const searchFilmTitle = async (value, currentPage) => {
   const searchText = value.replace(/ /, "+");
@@ -16,90 +17,26 @@ export const searchFilmTitle = async (value, currentPage) => {
 };
 
 export const signup = async formData => {
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: "include",
-      body: JSON.stringify(formData)
-    });
-    const data = await res.json();
-    if (res.status !== 200) {
-      return {
-        errors: [...data.errors]
-      };
-    }
-    return data;
-  } catch (err) {
-    console.log(err);
-    return {
-      errors: ["something went wrong!"]
-    };
-  }
+  const data = await xawf.POST("/signup", formData);
+  return data;
 };
 
 export const login = async formData => {
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: "include",
-      body: JSON.stringify(formData)
-    });
-    const data = await res.json();
-    if (res.status !== 200) {
-      return {
-        errors: [...data.errors]
-      };
-    }
-    return data;
-  } catch (err) {
-    console.error(err);
-    return {
-      errors: ["something went wrong!"]
-    };
-  }
+  const data = await xawf.POST("/login", formData);
+  return data;
 };
 
 export const requestLogout = async () => {
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/logout`, {
-      method: "GET",
-      credentials: "include"
-    });
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    return new Error(err);
-  }
+  const data = await xawf.GET("/logout");
+  return data;
 };
 
 export const pingUser = async () => {
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/user`, {
-      method: "GET",
-      credentials: "include"
-    });
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const data = await xawf.GET("/user");
+  return data;
 };
 
 export const getMeta = async () => {
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/user-film-meta`, {
-      method: "GET",
-      credentials: "include"
-    });
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
+  const data = await xawf.GET("/user-film-meta");
+  return data;
 };

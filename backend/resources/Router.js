@@ -3,6 +3,7 @@ const Router = require("express").Router();
 const AuthControllers = require("./auth/auth.controllers");
 const UserFilmMetaControllers = require("./UserFilmMeta/userFilmMeta.controllers");
 const badRequest = require("../util/badRequest");
+const expressCallback = require("../util/expressCallback");
 
 const protect = (req, res, next) => {
   if (!req.user) {
@@ -15,26 +16,26 @@ const protect = (req, res, next) => {
 };
 
 Router.route("/signup")
-  .post(AuthControllers.signup)
-  .all(badRequest);
+  .post(expressCallback(AuthControllers.signup))
+  .all(expressCallback(badRequest));
 
 Router.route("/login")
-  .post(AuthControllers.login)
-  .all(badRequest);
+  .post(expressCallback(AuthControllers.login))
+  .all(expressCallback(badRequest));
 
 Router.route("/logout")
-  .get(AuthControllers.logout)
-  .all(badRequest);
+  .get(expressCallback(AuthControllers.logout))
+  .all(expressCallback(badRequest));
 
 Router.route("/user")
-  .get(protect, AuthControllers.getUser)
-  .all(badRequest);
+  .get(protect, expressCallback(AuthControllers.getUser))
+  .all(expressCallback(badRequest));
 
 Router.route("/user-film-meta")
-  .post(protect, UserFilmMetaControllers.createOne)
-  .get(protect, UserFilmMetaControllers.getMany)
-  .put(protect, UserFilmMetaControllers.updateOne)
-  .delete(protect, UserFilmMetaControllers.deleteOne)
-  .all(badRequest);
+  .post(protect, expressCallback(UserFilmMetaControllers.createOne))
+  .get(protect, expressCallback(UserFilmMetaControllers.getMany))
+  .put(protect, expressCallback(UserFilmMetaControllers.updateOne))
+  .delete(protect, expressCallback(UserFilmMetaControllers.deleteOne))
+  .all(expressCallback(badRequest));
 
 module.exports = Router;
