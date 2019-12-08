@@ -10,7 +10,7 @@ const Card = styled.div`
   display: grid;
   grid-template-columns: 185px auto;
   grid-column-gap: 20px;
-  padding: 15px 0;
+  padding: 15px 10px;
   height: 278px;
   max-height: 278px;
 `;
@@ -75,25 +75,25 @@ function ResultCard(props) {
         {props.poster.slice(-4) === "null" ? ( //display a image logo if there is no poster from the database
           <FileImage size="60" color="gray" />
         ) : (
-            <img // display the corresponding poster for the movie
-              src={`${props.poster}`}
-              alt="Movie Poster"
-              width="185"
-              height="278"
-              style={{ objectFit: "cover" }}
-            />
-          )}
+          <img // display the corresponding poster for the movie
+            src={`${props.poster}`}
+            alt="Movie Poster"
+            width="185"
+            height="278"
+            style={{ objectFit: "cover" }}
+          />
+        )}
       </Poster>
       <Info>
         <Top>
           <Title>{props.title}</Title>
-          {props.hasUser ?
-            (props.isFavourite ? (
+          {props.hasUser ? (
+            props.isFavourite ? (
               <FullHeart size="25" />
             ) : (
-                <EmptyHeart size="24" />
-              ))
-            : null}
+              <EmptyHeart size="24" />
+            )
+          ) : null}
         </Top>
 
         <Year>
