@@ -4,21 +4,32 @@ import styled from "styled-components";
 import { searchFilmTitle } from "../Network";
 
 const Container = styled.section`
-  padding: 30px 0;
+  padding: 15px 0;
   background-color: #eeeeee;
 `;
 
 const Form = styled.form`
   max-width: 940px;
   margin: auto;
+  padding: 0 10px;
+  }
+`;
+
+const FormGroup = styled.div`
+  display: inline-block;
+  width: 100%;
+  padding: 12px 0px;
+  border-radius: 40px;
+  background-color: #fff;
   input {
-    width: 300px;
+    width: calc(100% - 200px);
+    margin-left:40px;
     padding: 5px 10px;
     border: none;
     border-bottom: 2px solid lightgrey;
   }
   button {
-    margin-left: 30px;
+    margin-left: 20px;
     padding: 7px 20px;
     border: none;
     border-radius: 3px;
@@ -27,14 +38,6 @@ const Form = styled.form`
     &:hover {
       cursor: pointer;
     }
-  }
-`;
-
-const FormGroup = styled.div`
-  display: inline-block;
-  padding: 25px 40px;
-  border-radius: 40px;
-  background-color: #fff;
 `;
 
 const SearchBar = ({ updateResults }) => {
