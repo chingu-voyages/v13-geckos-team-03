@@ -22,9 +22,13 @@ module.exports = controller => {
         if (httpResponse.cookie) {
           res.cookie("token", httpResponse.cookie);
         }
+        if (httpResponse.clearCookie) {
+          res.clearCookie("token");
+        }
         res.status(httpResponse.statusCode).json(httpResponse.body);
       })
       .catch(err => {
+        console.log("express callback error: ");
         res.status(500).send({ error: "Something went wrong" });
       });
   };
