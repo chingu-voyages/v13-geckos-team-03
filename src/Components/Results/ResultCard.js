@@ -7,12 +7,17 @@ import { Heart, FileImage } from "styled-icons/fa-regular";
 import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline";
 
 const Card = styled.div`
+  margin-top: 40px;
+  margin-bottom: 40px;
   display: grid;
-  grid-template-columns: 185px auto;
-  grid-column-gap: 20px;
-  padding: 15px 0;
-  height: 278px;
-  max-height: 278px;
+  grid-template-columns: 1fr;
+  @media (min-width: 650px) {
+    grid-template-columns: 185px auto;
+    grid-column-gap: 20px;
+  }
+  @media (min-width: 850px) {
+    grid-template-columns: 250px auto;
+  }
 `;
 
 const Poster = styled.div`
@@ -20,6 +25,9 @@ const Poster = styled.div`
   background: LightGray;
   align-items: center;
   justify-content: center;
+  img {
+    width: 100%;
+  }
 `;
 
 const Info = styled.div`
@@ -31,9 +39,16 @@ const Top = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 20px;
+  @media (min-width: 650px) {
+    margin-top: 0;
+  }
+  svg {
+    margin-left: 20px;
+  }
 `;
 
-const Title = styled.div`
+const Title = styled.h2`
   font-size: 34px;
 `;
 
@@ -47,17 +62,22 @@ const FullHeart = styled(HeartFullOutline)`
 `;
 
 const Year = styled.div`
-  margin: 0 0 10px 10px;
+  margin-left: 10px;
 `;
 
 const Rating = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
   margin-bottom: 20px;
-  @media (max-width: 600px) {
-    flex-direction: column;
-    align-items: flex-start;
+  @media (min-width: 500px) {
+    grid-column-gap: 15px;
+    grid-template-columns: 200px auto;
   }
+`;
+
+const Votes = styled.div`
+  margin-top: 10px;
 `;
 
 const BoldBig = styled.a`
@@ -75,25 +95,22 @@ function ResultCard(props) {
         {props.poster.slice(-4) === "null" ? ( //display a image logo if there is no poster from the database
           <FileImage size="60" color="gray" />
         ) : (
-            <img // display the corresponding poster for the movie
-              src={`${props.poster}`}
-              alt="Movie Poster"
-              width="185"
-              height="278"
-              style={{ objectFit: "cover" }}
-            />
-          )}
+          <img // display the corresponding poster for the movie
+            src={`${props.poster}`}
+            alt="Movie Poster"
+          />
+        )}
       </Poster>
       <Info>
         <Top>
           <Title>{props.title}</Title>
-          {props.hasUser ?
-            (props.isFavourite ? (
+          {props.hasUser ? (
+            props.isFavourite ? (
               <FullHeart size="25" />
             ) : (
-                <EmptyHeart size="24" />
-              ))
-            : null}
+              <EmptyHeart size="24" />
+            )
+          ) : null}
         </Top>
 
         <Year>
@@ -104,11 +121,11 @@ function ResultCard(props) {
 
         <Rating>
           <RatingBar voteAverage={props.voteAverage} />
-          <div>
+          <Votes>
             <BoldBig>{props.voteAverage}</BoldBig>/10
             <BoldBig>- {props.voteCount}</BoldBig>{" "}
             {props.voteCount === 1 ? "vote" : "votes"}
-          </div>
+          </Votes>
         </Rating>
 
         <Summary>{props.overview}</Summary>
