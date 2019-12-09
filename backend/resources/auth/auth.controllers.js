@@ -131,13 +131,13 @@ const login = async (req, res) => {
   }
 };
 
-const logout = (req, res) => {
-  res.clearCookie("token");
+const logout = async () => {
   return {
     statusCode: 200,
     body: {
       messages: ["logged out successfully"]
-    }
+    },
+    clearCookie: true
   };
 };
 
