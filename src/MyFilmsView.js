@@ -44,7 +44,7 @@ export default function() {
 
   return (
     <div>
-      <h1>My Films</h1>
+      <h1 style={{ textAlign: "center" }}>My Films</h1>
       {filmData && <Results searchResults={filmData} />}
     </div>
   );
