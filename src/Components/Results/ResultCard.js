@@ -7,8 +7,9 @@ import { Heart, FileImage } from "styled-icons/fa-regular";
 import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline";
 
 const Card = styled.div`
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 0 15px;
   display: grid;
   grid-template-columns: 1fr;
   @media (min-width: 650px) {
