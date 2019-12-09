@@ -133,20 +133,31 @@ const login = async (req, res) => {
 
 const logout = (req, res) => {
   res.clearCookie("token");
-  res.status(200).json({
-    messages: ["logged out successfully"]
-  });
+  return {
+    statusCode: 200,
+    body: {
+      messages: ["logged out successfully"]
+    }
+  };
 };
 
 const getUser = async (req, res, next) => {
   try {
     const user = await User.findById({ _id: req.user._id });
-    res.status(200).json({
-      user
-    });
+    return {
+      statusCode: 200,
+      body: {
+        user
+      }
+    };
   } catch (err) {
     console.log(err);
-    next(err);
+    return {
+      statusCode: 500,
+      body: {
+        errors: ["mongoose error"]
+      }
+    };
   }
 };
 
