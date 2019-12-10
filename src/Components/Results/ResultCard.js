@@ -94,21 +94,32 @@ const BoldBig = styled.a`
 const Summary = styled.div``;
 
 function ResultCard(props) {
+  const { updateUser } = props;
+
   const handleHeartClick = async () => {
     if (props.isFavourite) {
       const res = await deleteHeart(props._id);
       if (res.errors) {
         console.log(res.errors);
       } else {
-        // remove from user in state
+        updateUser(state => {
+          delete state.films[res.doc.filmId];
+          return {
+            ...state
+          };
+        });
       }
     } else {
-      console.log(props);
       const res = await createHeart(props.id);
       if (res.errors) {
         console.log(res.errors);
       } else {
-        console.log(res);
+        updateUser(state => {
+          state.films[res.filmId] = res;
+          return {
+            ...state
+          };
+        });
       }
     }
   };

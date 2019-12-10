@@ -33,6 +33,7 @@ function Results(props) {
           voteCount={result.vote_count}
           overview={result.overview}
           user={props.user}
+          updateUser={props.updateUser}
         />
       ))}
     </Container>

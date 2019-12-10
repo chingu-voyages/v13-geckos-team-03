@@ -54,7 +54,11 @@ export default function(props) {
       </Dropdown>
 
       {results.length === 0 ? null : (
-        <Results searchResults={results} user={props.user} />
+        <Results
+          searchResults={results}
+          user={props.user}
+          updateUser={props.updateUser}
+        />
       )}
       <GoUpButton></GoUpButton>
     </div>
