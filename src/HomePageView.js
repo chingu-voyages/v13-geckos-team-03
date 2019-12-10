@@ -53,7 +53,7 @@ export default function(props) {
         <option value="top_rated">Top Rated</option>
       </Dropdown>
 
-      {results.length === 0 ? null : <Results searchResults={results}  hasUser={props.hasUser} />}
+      {results.length === 0 ? null : <Results searchResults={results}  user={props.user} />}
       <GoUpButton></GoUpButton>
     </div>
   );
