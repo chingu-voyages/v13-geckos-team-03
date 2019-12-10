@@ -53,6 +53,9 @@ const Title = styled.h2`
 const HeartButton = styled.button`
   padding: 0;
   margin-left: 20px;
+  background: none;
+  border: none;
+  outline: none;
 `;
 
 const EmptyHeart = styled(Heart)`
