@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import RatingBar from "./RatingBar";
-
+import { createHeart, deleteHeart } from '../Network'
 import { Heart, FileImage } from "styled-icons/fa-regular";
 import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline";
 
@@ -44,13 +44,15 @@ const Top = styled.div`
   @media (min-width: 650px) {
     margin-top: 0;
   }
-  svg {
-    margin-left: 20px;
-  }
+  
 `;
 
 const Title = styled.h2`
   font-size: 34px;
+`;
+const HeartButton = styled.button`
+  padding: 0;
+  margin-left: 20px;
 `;
 
 const EmptyHeart = styled(Heart)`
@@ -90,6 +92,27 @@ const BoldBig = styled.a`
 const Summary = styled.div``;
 
 function ResultCard(props) {
+
+  const handleHeartClick = async () => {
+    if (props.isFavourite) {
+      const res = await deleteHeart(props._id)
+      if (res.errors) {
+        console.log(res.errors)
+      } else {
+        // remove from user in state
+      }
+    }
+    else {
+      console.log(props)
+      const res = await createHeart(props.id);
+      if (res.errors) {
+        console.log(res.errors)
+      } else {
+        console.log(res)
+      }
+    }
+  }
+
   return (
     <Card>
       <Poster>
@@ -107,9 +130,13 @@ function ResultCard(props) {
           <Title>{props.title}</Title>
           {props.user ? (
             props.isFavourite ? (
-              <FullHeart size="25" />
+              <HeartButton onClick={handleHeartClick}>
+                <FullHeart size="25" />
+              </HeartButton>
             ) : (
-              <EmptyHeart size="24" />
+              <HeartButton onClick={handleHeartClick}>
+                <EmptyHeart size="24" />
+              </HeartButton>
             )
           ) : null}
         </Top>
