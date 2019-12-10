@@ -123,7 +123,6 @@ function ResultCard(props) {
       }
     }
   };
-
   return (
     <Card>
       <Poster>
@@ -139,7 +138,7 @@ function ResultCard(props) {
       <Info>
         <Top>
           <Title>{props.title}</Title>
-          {props.user ? (
+          {props.user.user ? (
             props.isFavourite ? (
               <HeartButton onClick={handleHeartClick}>
                 <FullHeart size="25" />

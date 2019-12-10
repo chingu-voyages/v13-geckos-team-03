@@ -32,11 +32,13 @@ function App() {
 
   const logUserIn = newUser => {
     handleGetMeta();
-    updateUser(() => {
+    updateUser(state => {
       return {
+        ...state,
         user: true,
         email: newUser.email,
-        _id: newUser._id
+        _id: newUser._id,
+        films: {}
       };
     });
   };
