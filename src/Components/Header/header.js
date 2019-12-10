@@ -36,6 +36,10 @@ const Links = styled.ul`
   li {
     display: inline-block;
     list-style: none;
+    @media screen and (max-width:995px) {
+      display: block;
+      padding: 20px;
+    }
   }
 `;
 
