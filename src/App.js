@@ -55,10 +55,14 @@ function App() {
       console.log(res.errors);
     }
     if (res.docs.length) {
+      const films = res.docs.reduce((acc, film) => {
+        acc[film.filmId] = film;
+        return acc;
+      }, {});
       updateUser(user => {
         return {
           ...user,
-          films: [...res.docs]
+          films
         };
       });
     }
@@ -84,10 +88,10 @@ function App() {
       <BrowserRouter basename="/v13-geckos-team-03">
         <Header user={user} logUserOut={logUserOut} />
         <Route exact path="/">
-          <HomePageView hasUser={user.user} />
+          <HomePageView user={user} />
         </Route>
         <Route exact path="/search">
-          <SearchView hasUser={user.user} />
+          <SearchView user={user} />
         </Route>
         <Route path="/myfilms">
           <MyFilmsView />

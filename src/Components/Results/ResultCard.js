@@ -105,7 +105,7 @@ function ResultCard(props) {
       <Info>
         <Top>
           <Title>{props.title}</Title>
-          {props.hasUser ? (
+          {props.user ? (
             props.isFavourite ? (
               <FullHeart size="25" />
             ) : (
