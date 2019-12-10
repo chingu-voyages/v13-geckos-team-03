@@ -29,9 +29,6 @@ const Logo = styled(Link)`
   margin-right: auto;
   @media (max-width: 768px) {
     font-size: 1.3rem;
-    span {
-      display: none;
-    }
   }
 `;
 
