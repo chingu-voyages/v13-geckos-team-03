@@ -58,6 +58,9 @@ const StyledNavLink = styled(NavLink)`
     color: #ffff;
     border-bottom: 1px solid rgb(255, 255, 255, 0.64);
   }
+  @media screen and (max-width:995px) {
+  margin: 0 0.8rem;
+  }
   @media screen and (device-aspect-ratio: 40/71) {
     font-size: 0.8rem;
     margin: 0 0.6rem;
