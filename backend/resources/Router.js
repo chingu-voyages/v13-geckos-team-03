@@ -28,7 +28,7 @@ Router.route("/logout")
   .all(expressCallback(badRequest));
 
 Router.route("/user")
-  .get(protect, expressCallback(AuthControllers.getUser))
+  .get(expressCallback(AuthControllers.getUser))
   .all(expressCallback(badRequest));
 
 Router.route("/user-film-meta")

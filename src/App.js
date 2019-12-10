@@ -31,7 +31,6 @@ function App() {
   const [user, updateUser] = useState({ user: false });
 
   const logUserIn = newUser => {
-    handleGetMeta();
     updateUser(state => {
       return {
         ...state,
@@ -41,6 +40,7 @@ function App() {
         films: {}
       };
     });
+    handleGetMeta();
   };
 
   const logUserOut = () => {
@@ -74,13 +74,15 @@ function App() {
     (async () => {
       const res = await pingUser();
       if (res.errors) {
-        return;
+        console.log(res.errors);
       }
-      logUserIn({
-        user: true,
-        email: res.user.email,
-        _id: res.user._id
-      });
+      if (res.user) {
+        logUserIn({
+          user: true,
+          email: res.user.email,
+          _id: res.user._id
+        });
+      }
     })();
   }, []);
 
