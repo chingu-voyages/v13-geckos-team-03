@@ -94,7 +94,7 @@ function App() {
           <SearchView user={user} updateUser={updateUser} />
         </Route>
         <Route path="/myfilms">
-          <MyFilmsView />
+          <MyFilmsView user={user} updateUser={updateUser} />
         </Route>
         <Route
           path="/signup"
