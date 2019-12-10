@@ -31,14 +31,16 @@ function App() {
   const [user, updateUser] = useState({ user: false });
 
   const logUserIn = newUser => {
-    handleGetMeta();
-    updateUser(() => {
+    updateUser(state => {
       return {
+        ...state,
         user: true,
         email: newUser.email,
-        _id: newUser._id
+        _id: newUser._id,
+        films: {}
       };
     });
+    handleGetMeta();
   };
 
   const logUserOut = () => {
@@ -55,10 +57,14 @@ function App() {
       console.log(res.errors);
     }
     if (res.docs.length) {
+      const films = res.docs.reduce((acc, film) => {
+        acc[film.filmId] = film;
+        return acc;
+      }, {});
       updateUser(user => {
         return {
           ...user,
-          films: [...res.docs]
+          films
         };
       });
     }
@@ -68,13 +74,15 @@ function App() {
     (async () => {
       const res = await pingUser();
       if (res.errors) {
-        return;
+        console.log(res.errors);
       }
-      logUserIn({
-        user: true,
-        email: res.user.email,
-        _id: res.user._id
-      });
+      if (res.user) {
+        logUserIn({
+          user: true,
+          email: res.user.email,
+          _id: res.user._id
+        });
+      }
     })();
   }, []);
 
@@ -84,13 +92,13 @@ function App() {
       <BrowserRouter basename="/v13-geckos-team-03">
         <Header user={user} logUserOut={logUserOut} />
         <Route exact path="/">
-          <HomePageView hasUser={user.user} />
+          <HomePageView user={user} updateUser={updateUser} />
         </Route>
         <Route exact path="/search">
-          <SearchView hasUser={user.user} />
+          <SearchView user={user} updateUser={updateUser} />
         </Route>
         <Route path="/myfilms">
-          <MyFilmsView />
+          <MyFilmsView user={user} updateUser={updateUser} />
         </Route>
         <Route
           path="/signup"

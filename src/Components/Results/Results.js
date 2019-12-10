@@ -9,19 +9,31 @@ const Container = styled.div`
 `;
 
 function Results(props) {
+  const { films } = props.user;
   return (
     <Container>
       {props.searchResults.map(result => (
         <ResultCard
           key={result.id}
+          id={result.id}
           poster={`https://image.tmdb.org/t/p/w185${result.poster_path}`}
           title={result.title}
-          isFavourite={false}
+          isFavourite={films ? (films[result.id] ? true : false) : false}
+          _id={
+            films
+              ? films[result.id]
+                ? films[result.id]._id
+                  ? films[result.id]._id
+                  : false
+                : false
+              : false
+          }
           releaseDate={result.release_date}
           voteAverage={result.vote_average}
           voteCount={result.vote_count}
           overview={result.overview}
-          hasUser={props.hasUser}
+          user={props.user}
+          updateUser={props.updateUser}
         />
       ))}
     </Container>

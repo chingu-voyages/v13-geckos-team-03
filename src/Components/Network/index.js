@@ -40,3 +40,17 @@ export const getMeta = async () => {
   const data = await xawf.GET("/user-film-meta");
   return data;
 };
+
+export const createHeart = async filmId => {
+  const data = await xawf.POST("/user-film-meta", {
+    filmId
+  });
+  return data;
+};
+
+export const deleteHeart = async docId => {
+  const data = await xawf.DELETE("/user-film-meta", {
+    docId
+  });
+  return data;
+};

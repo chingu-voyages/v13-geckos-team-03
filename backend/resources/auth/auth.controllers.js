@@ -142,6 +142,14 @@ const logout = async () => {
 };
 
 const getUser = async (req, res, next) => {
+  if (!req.user) {
+    return {
+      statusCode: 200,
+      body: {
+        user: false
+      }
+    };
+  }
   try {
     const user = await User.findById({ _id: req.user._id });
     return {

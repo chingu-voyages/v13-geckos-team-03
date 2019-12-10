@@ -10,8 +10,8 @@ const Dropdown = styled.select`
   margin: 30px auto;
   font-size: 34px;
   border: none;
-  border-bottom: #3B3272 solid;
-  color: #3B3272;
+  border-bottom: #3b3272 solid;
+  color: #3b3272;
   outline: none;
   &:hover {
     cursor: pointer;
@@ -53,7 +53,13 @@ export default function(props) {
         <option value="top_rated">Top Rated</option>
       </Dropdown>
 
-      {results.length === 0 ? null : <Results searchResults={results}  hasUser={props.hasUser} />}
+      {results.length === 0 ? null : (
+        <Results
+          searchResults={results}
+          user={props.user}
+          updateUser={props.updateUser}
+        />
+      )}
       <GoUpButton></GoUpButton>
     </div>
   );

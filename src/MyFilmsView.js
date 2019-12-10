@@ -4,7 +4,7 @@ import Results from "./Components/Results/Results";
 import APIKEY from "./apikey.js";
 import { BACKEND_URL } from "./config";
 
-export default function() {
+export default function(props) {
   const [userData, setUserData] = useState([]); // for storing the film ids of the films the user has favourited
   const [filmData, setFilmData] = useState([]); // for storing the film data of the films the user has favourited
 
@@ -45,7 +45,13 @@ export default function() {
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>My Films</h1>
-      {filmData && <Results searchResults={filmData} />}
+      {filmData && (
+        <Results
+          searchResults={filmData}
+          user={props.user}
+          updateUser={props.updateUser}
+        />
+      )}
     </div>
   );
 }
