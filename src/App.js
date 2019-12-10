@@ -88,10 +88,10 @@ function App() {
       <BrowserRouter basename="/v13-geckos-team-03">
         <Header user={user} logUserOut={logUserOut} />
         <Route exact path="/">
-          <HomePageView user={user} />
+          <HomePageView user={user} updateUser={updateUser} />
         </Route>
         <Route exact path="/search">
-          <SearchView user={user} />
+          <SearchView user={user} updateUser={updateUser} />
         </Route>
         <Route path="/myfilms">
           <MyFilmsView />

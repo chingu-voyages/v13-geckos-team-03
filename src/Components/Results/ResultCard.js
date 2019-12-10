@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import RatingBar from "./RatingBar";
-import { createHeart, deleteHeart } from '../Network'
+import { createHeart, deleteHeart } from "../Network";
 import { Heart, FileImage } from "styled-icons/fa-regular";
 import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline";
 
@@ -44,7 +44,6 @@ const Top = styled.div`
   @media (min-width: 650px) {
     margin-top: 0;
   }
-  
 `;
 
 const Title = styled.h2`
@@ -95,26 +94,24 @@ const BoldBig = styled.a`
 const Summary = styled.div``;
 
 function ResultCard(props) {
-
   const handleHeartClick = async () => {
     if (props.isFavourite) {
-      const res = await deleteHeart(props._id)
+      const res = await deleteHeart(props._id);
       if (res.errors) {
-        console.log(res.errors)
+        console.log(res.errors);
       } else {
         // remove from user in state
       }
-    }
-    else {
-      console.log(props)
+    } else {
+      console.log(props);
       const res = await createHeart(props.id);
       if (res.errors) {
-        console.log(res.errors)
+        console.log(res.errors);
       } else {
-        console.log(res)
+        console.log(res);
       }
     }
-  }
+  };
 
   return (
     <Card>

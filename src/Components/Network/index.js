@@ -46,11 +46,11 @@ export const createHeart = async filmId => {
     filmId
   });
   return data;
-}
+};
 
 export const deleteHeart = async docId => {
   const data = await xawf.DELETE("/user-film-meta", {
     docId
   });
   return data;
-}
+};
