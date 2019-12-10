@@ -19,6 +19,7 @@ const NavBar = styled.nav`
   align-items: center;
   justify-content: flex-end;
 `;
+
 const Logo = styled(Link)`
   margin-left: 50px;
   color: #ffff;
@@ -82,21 +83,9 @@ const Bar = styled.label`
   transition: 0.4s;
   order: 1;
   position: absolute;
-  top: 40px;
+  top: 30px;
   right: 40px;
   @media screen and (max-width:995px) {
-    display: block;
-  }
-`;
-const BurgerCheckbox = styled.label` 
-  margin-left: 10px;
-  cursor: pointer;
-  display: none;
-  transition: 0.4s;
-  @media screen and (max-width:995px) {
-    position: absolute;
-    top: 40px;
-    right: 40px;
     display: block;
   }
 `;
@@ -104,17 +93,6 @@ const BurgerCheckbox = styled.label`
 const Menu = styled(Bars)`
   width: 20px;
   height: 20px;
-  display: inherit;
-  &:hover {
-    color: #ccc;
-  }
-`;
-
-const Close = styled(Cross)`
-  width: 20px;
-  height: 20px;
-  display: inherit;
-
   &:hover {
     color: #ccc;
   }
@@ -123,7 +101,6 @@ const Close = styled(Cross)`
 const Container = styled.nav`
   color: white;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   font-size: 1rem;
   @media screen and (max-width:995px) {
@@ -137,6 +114,29 @@ const Container = styled.nav`
     transition: 0.3s;
   }
 `;
+
+const BurgerCheckbox = styled.label` 
+  margin-left: 10px;
+  cursor: pointer;
+  display: none;
+  transition: 0.4s;
+  @media screen and (max-width:995px) {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    display: block;
+  }
+`;
+
+const Close = styled(Cross)`
+  width: 20px;
+  height: 20px;
+
+  &:hover {
+    color: #ccc;
+  }
+`;
+
 
 
 export default function ({ user, logUserOut }) {
