@@ -28,7 +28,7 @@ To run this project locally do the following:
 ### Frontend: 
 1. Clone the project 
 2. run `npm install` to install all the dependencies
-3. Create an account in The Film DB and follow the instructions [here](https://developers.themoviedb.org/3/getting-started/introduction) to get your API key. Change [apikeyExample.js]() file name to apikey.js and paste your API key number there
+3. Create an account in The Film DB and follow the instructions [here](https://developers.themoviedb.org/3/getting-started/introduction) to get your API key. Change [apikeyExample.js](https://github.com/chingu-voyages/v13-geckos-team-03/blob/feature/minor-improvements/src/apikeyExample.js) file name to apikey.js and paste your API key number there
 4. Run `npm run dev` to start the application. You will  be able to access it at localhost:3000
 
 ### Backend: 
