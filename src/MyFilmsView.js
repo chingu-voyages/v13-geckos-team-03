@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Results from "./Components/Results/Results";
+import styled from "styled-components";
 
 import APIKEY from "./apikey.js";
 import { BACKEND_URL } from "./config";
+import GoUpButton from "./Components/BackToTopButton/backtotopbutton.js";
+
+
+const Title = styled.h1` 
+  text-align: center;
+  margin: 30px;
+  font-size: 2.5rem;
+`
 
 export default function(props) {
   const [userData, setUserData] = useState([]); // for storing the film ids of the films the user has favourited
@@ -44,7 +53,7 @@ export default function(props) {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>My Films</h1>
+      <Title>My Films</Title>
       {filmData && (
         <Results
           searchResults={filmData}
@@ -52,6 +61,7 @@ export default function(props) {
           updateUser={props.updateUser}
         />
       )}
+      <GoUpButton></GoUpButton>
     </div>
   );
 }
