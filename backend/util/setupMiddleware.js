@@ -25,13 +25,12 @@ function SetupMiddleware(app) {
     process.env.MODE === "development"
       ? process.env.DEV_FRONTEND_URL
       : process.env.PROD_FRONTEND_URL;
-  // app.use(
-  //   cors({
-  //     origin: origin,
-  //     credentials: true
-  //   })
-  // );
-  app.use(cors());
+  app.use(
+    cors({
+      origin: "https://chingu-voyages.github.io/v13-geckos-team-03/",
+      credentials: true
+    })
+  );
   app.use(parseToken);
 }
 
