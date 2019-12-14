@@ -173,11 +173,11 @@ export default function ({ user, logUserOut }) {
               search
           </StyledNavLink>
           </li>
-          <li>
+          {user.user ? (<li>
             <StyledNavLink exact to="/myfilms" activeClassName="active">
               my films
           </StyledNavLink>
-          </li>
+          </li>) : null}
           {!user.user && (
             <>
               <li>
