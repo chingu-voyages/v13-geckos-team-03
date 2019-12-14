@@ -1,7 +1,7 @@
 # The Film Database 🍿
 > Find films and favourite them 
 
-![img](https://github.com/chingu-voyages/v13-geckos-team-03/blob/feature/minor-improvements/img/filmdbpic.png)
+![img](https://github.com/chingu-voyages/v13-geckos-team-03/blob/master/img/filmdbpic.png)
 
 Responsive app that shows films loading data via [The Movie Database API](https://developers.themoviedb.org/4/getting-started).
 
@@ -11,7 +11,7 @@ Live version: *coming soon*.
 
 ## Features
 
-![gif](https://github.com/chingu-voyages/v13-geckos-team-03/blob/feature/minor-improvements/img/featuresgif.gif)
+![gif](https://github.com/chingu-voyages/v13-geckos-team-03/blob/master/img/featuresgif.gif)
 
 - Main page shows a list of popular and most rated films
 - Search bar to look for films
@@ -28,7 +28,7 @@ To run this project locally do the following:
 ### Frontend: 
 1. Clone the project 
 2. run `npm install` to install all the dependencies
-3. Create an account in The Film DB and follow the instructions [here](https://developers.themoviedb.org/3/getting-started/introduction) to get your API key. Change [apikeyExample.js](https://github.com/chingu-voyages/v13-geckos-team-03/blob/feature/minor-improvements/src/apikeyExample.js) file name to apikey.js and paste your API key number there
+3. Create an account in The Film DB and follow the instructions [here](https://developers.themoviedb.org/3/getting-started/introduction) to get your API key. Change [apikeyExample.js](https://github.com/chingu-voyages/v13-geckos-team-03/blob/master/src/apikeyExample.js) file name to apikey.js and paste your API key number there
 4. Run `npm run dev` to start the application. You will  be able to access it at localhost:3000
 
 ### Backend: 
