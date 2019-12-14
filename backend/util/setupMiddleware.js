@@ -27,7 +27,7 @@ function SetupMiddleware(app) {
       : process.env.PROD_FRONTEND_URL;
   app.use(
     cors({
-      origin: "https://chingu-voyages.github.io/v13-geckos-team-03",
+      origin: "chingu-voyages.github.io/v13-geckos-team-03",
       credentials: true
     })
   );
