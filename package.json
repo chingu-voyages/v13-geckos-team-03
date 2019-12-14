@@ -57,5 +57,8 @@
       "/node_modules/"
     ]
   },
-  "homepage": "https://chingu-voyages.github.io/v13-geckos-team-03"
+  "homepage": "https://chingu-voyages.github.io/v13-geckos-team-03",
+  "engines": {
+    "node": "12.x"
+  }
 }
