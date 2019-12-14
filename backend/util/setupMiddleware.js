@@ -25,12 +25,13 @@ function SetupMiddleware(app) {
     process.env.MODE === "development"
       ? process.env.DEV_FRONTEND_URL
       : process.env.PROD_FRONTEND_URL;
-  app.use(
-    cors({
-      origin: origin,
-      credentials: true
-    })
-  );
+  // app.use(
+  //   cors({
+  //     origin: origin,
+  //     credentials: true
+  //   })
+  // );
+  app.use(cors());
   app.use(parseToken);
 }
 
