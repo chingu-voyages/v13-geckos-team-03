@@ -15,6 +15,7 @@ const xawf = async (method, url, body) => {
     return data;
   } catch (err) {
     // Hits this with a cors error
+    console.log(err);
     return {
       errors: ["fetch error!"]
     };
