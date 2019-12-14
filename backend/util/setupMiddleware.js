@@ -25,9 +25,10 @@ function SetupMiddleware(app) {
     process.env.MODE === "development"
       ? process.env.DEV_FRONTEND_URL
       : process.env.PROD_FRONTEND_URL;
+  console.log(origin);
   app.use(
     cors({
-      origin: "chingu-voyages.github.io/v13-geckos-team-03",
+      origin,
       credentials: true
     })
   );
