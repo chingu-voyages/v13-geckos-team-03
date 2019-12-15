@@ -7,7 +7,7 @@ Responsive app that shows films loading data via [The Movie Database API](https:
 
 ## Demo
 
-Live version: *coming soon*.
+Live version: [https://chingu-voyages.github.io/v13-geckos-team-03/](https://chingu-voyages.github.io/v13-geckos-team-03/).
 
 ## Features
 
